@@ -25,7 +25,8 @@ int main()
   const char* rawString = "hello world";
 
   // iterate over the range of the begin of rawString and its end:
-  for (const auto pos = rawString; pos != NullTerm{}; ++pos) {
+  // NOLINTNEXTLINE(readability-qualified-auto)
+  for (auto pos = rawString; pos != NullTerm{}; ++pos) {
     std::cout << ' ' << *pos;
   }
   std::cout << '\n';

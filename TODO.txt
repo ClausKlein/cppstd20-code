@@ -1,0 +1,27 @@
+bash-3.2$ builddriver ninja -C build
+builddriver executing: 'ninja -C build'
+Compilation SUCCEED in 4.263197 seconds
+Number of warnings: 21
+WarningErrorEntry(path='/Users/clausklein/Workspace/cpp/cxx20/cppstd20-code/coro/tracknew.hpp', lineno='47', severity='warning', message='use of old-style cast [-Wold-style-cast]', column='22')
+WarningErrorEntry(path='/Users/clausklein/Workspace/cpp/cxx20/cppstd20-code/coro/tracknew.hpp', lineno='63', severity='warning', message='use of old-style cast [-Wold-style-cast]', column='33')
+WarningErrorEntry(path='/Users/clausklein/Workspace/cpp/cxx20/cppstd20-code/coro/tracknew.hpp', lineno='63', severity='warning', message='use of old-style cast [-Wold-style-cast]', column='44')
+WarningErrorEntry(path='/Users/clausklein/Workspace/cpp/cxx20/cppstd20-code/coro/tracknew.hpp', lineno='63', severity='warning', message='use of old-style cast [-Wold-style-cast]', column='54')
+WarningErrorEntry(path='/Users/clausklein/Workspace/cpp/cxx20/cppstd20-code/coro/tracknew.hpp', lineno='67', severity='warning', message='use of old-style cast [-Wold-style-cast]', column='33')
+WarningErrorEntry(path='/Users/clausklein/Workspace/cpp/cxx20/cppstd20-code/coro/tracknew.hpp', lineno='67', severity='warning', message='use of old-style cast [-Wold-style-cast]', column='43')
+WarningErrorEntry(path='/Users/clausklein/Workspace/cpp/cxx20/cppstd20-code/coro/tracknew.hpp', lineno='89', severity='warning', message='use of old-style cast [-Wold-style-cast]', column='48')
+WarningErrorEntry(path='/Users/clausklein/Workspace/cpp/cxx20/cppstd20-code/coro/tracknew.hpp', lineno='89', severity='warning', message='use of old-style cast [-Wold-style-cast]', column='59')
+WarningErrorEntry(path='/Users/clausklein/Workspace/cpp/cxx20/cppstd20-code/coro/tracknew.hpp', lineno='92', severity='warning', message='use of old-style cast [-Wold-style-cast]', column='47')
+WarningErrorEntry(path='/Users/clausklein/Workspace/cpp/cxx20/cppstd20-code/coro/coropriosched2.hpp', lineno='120', severity='warning', message="declaration shadows a field of 'CoroPrioTask' [-Wshadow]", column='8')
+WarningErrorEntry(path='/Users/clausklein/Workspace/cpp/cxx20/cppstd20-code/coro/awaiter.hpp', lineno='23', severity='warning', message="unused parameter 'hdl' [-Wunused-parameter]", column='27')
+WarningErrorEntry(path='/Users/clausklein/Workspace/cpp/cxx20/cppstd20-code/coro/coreturn.cpp', lineno='27', severity='warning', message="implicit conversion from '_Signed' (aka 'long') to 'double' may lose precision [-Wimplicit-int-float-conversion]", column='19')
+WarningErrorEntry(path='/Users/clausklein/Workspace/cpp/cxx20/cppstd20-code/format/formatperf.cpp', lineno='31', severity='warning', message="'sprintf' is deprecated: This function is provided for compatibility reasons only.  Due to security concerns inherent in the design of sprintf(3), it is highly recommended that you use snprintf(3) instead. [-Wdeprecated-declarations]", column='5')
+WarningErrorEntry(path='/Users/clausklein/Workspace/cpp/cxx20/cppstd20-code/lib/begin.cpp', lineno='77', severity='warning', message="ignoring return value of function declared with 'nodiscard' attribute [-Wunused-result]", column='24')
+WarningErrorEntry(path='/Users/clausklein/Workspace/cpp/cxx20/cppstd20-code/lib/begin.cpp', lineno='78', severity='warning', message="ignoring return value of function declared with 'nodiscard' attribute [-Wunused-result]", column='24')
+WarningErrorEntry(path='/Users/clausklein/Workspace/cpp/cxx20/cppstd20-code/lib/begin.cpp', lineno='79', severity='warning', message="ignoring return value of function declared with 'nodiscard' attribute [-Wunused-result]", column='24')
+WarningErrorEntry(path='/Users/clausklein/Workspace/cpp/cxx20/cppstd20-code/lib/begin.cpp', lineno='80', severity='warning', message="ignoring return value of function declared with 'nodiscard' attribute [-Wunused-result]", column='24')
+WarningErrorEntry(path='/Users/clausklein/Workspace/cpp/cxx20/cppstd20-code/lib/begin.cpp', lineno='87', severity='warning', message="ignoring return value of function declared with 'nodiscard' attribute [-Wunused-result]", column='11')
+WarningErrorEntry(path='/Users/clausklein/Workspace/cpp/cxx20/cppstd20-code/lib/begin.cpp', lineno='88', severity='warning', message="ignoring return value of function declared with 'nodiscard' attribute [-Wunused-result]", column='11')
+WarningErrorEntry(path='/Users/clausklein/Workspace/cpp/cxx20/cppstd20-code/lib/begin.cpp', lineno='89', severity='warning', message="ignoring return value of function declared with 'nodiscard' attribute [-Wunused-result]", column='11')
+WarningErrorEntry(path='/Users/clausklein/Workspace/cpp/cxx20/cppstd20-code/lib/begin.cpp', lineno='90', severity='warning', message="ignoring return value of function declared with 'nodiscard' attribute [-Wunused-result]", column='11')
+bash-3.2$
+

@@ -22,7 +22,7 @@ int main()
 {
   std::queue<std::string> messages;
   std::mutex messagesMx;
-  std::condition_variable_any messagesCV;  
+  std::condition_variable_any messagesCV;
 
   // start thread that prints messages that occur in the queue:
   std::jthread t1{[&] (std::stop_token st) {
@@ -32,7 +32,7 @@ int main()
                         // wait for the next message:
                         std::unique_lock lock(messagesMx);
                         if (!messagesCV.wait(lock, st,
-                                             [&] { 
+                                             [&] {
                                                return !messages.empty();
                                              })) {
                           return;  // stop requested

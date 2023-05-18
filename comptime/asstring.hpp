@@ -28,7 +28,7 @@ constexpr std::string asString(long long value)
       return "-" + asString(-value);
     }
 
-    std::string s = asString(value / 10) + std::string(1, value % 10 + '0');
+    std::string s = asString(value / 10) + std::string(1, static_cast<char>(value % 10 + '0'));
     if (s.size() > 1 && s[0] == '0') {  // skip leading 0 if there is one
       s.erase(0, 1);
     }

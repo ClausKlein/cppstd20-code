@@ -52,7 +52,7 @@ int main()
   // wait until all tasks are done:
   std::cout << "\nwaiting until all tasks are done\n";
   allDone.wait();                      // wait until counter of latch is zero
-  std::cout << "\nall tasks done\n";   // note: threads might still run  
+  std::cout << "\nall tasks done\n";   // note: threads might still run
   //...
 }
 

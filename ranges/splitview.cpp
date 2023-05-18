@@ -20,15 +20,15 @@ void print(auto&& obj, int level = 0)
 {
   if constexpr(std::ranges::input_range<decltype(obj)>) {
     std::cout << '[';
-    for (const auto& elem : obj) { 
+    for (const auto& elem : obj) {
        print(elem, level+1);
     }
     std::cout << ']';
   }
-  else { 
+  else {
     std::cout << obj << ' ';
   }
-  if (level == 0) std::cout << '\n';
+  if (level == 0) { std::cout << '\n'; }
 }
 
 int main()

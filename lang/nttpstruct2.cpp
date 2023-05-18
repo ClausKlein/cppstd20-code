@@ -43,6 +43,6 @@ int main()
   func<Data{42, {1, 2, 3}, 42}>();    // OK
 
   constexpr Data d2{1, {2}, 3};
-  func<d2>();   
+  func<d2>();
 }
 

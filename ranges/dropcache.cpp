@@ -31,14 +31,14 @@ int main()
   auto vVec = vec | std::views::drop(2);
   auto vLst = lst | std::views::drop(2);
 
-  // insert a new element at the front (=> 0 1 2 3 4)  
+  // insert a new element at the front (=> 0 1 2 3 4)
   vec.insert(vec.begin(), 0);
   lst.insert(lst.begin(), 0);
 
   print(vVec);    // OK:  2 3 4
   print(vLst);    // OK:  2 3 4
 
-  // insert more elements at the front (=> 98 99 0 -1 0 1 2 3 4)  
+  // insert more elements at the front (=> 98 99 0 -1 0 1 2 3 4)
   vec.insert(vec.begin(), {98, 99, 0, -1});
   lst.insert(lst.begin(), {98, 99, 0, -1});
 

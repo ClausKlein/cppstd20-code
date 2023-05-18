@@ -15,8 +15,8 @@
 
 int main()
 {
-  constexpr int l1 = len("hello");  // uses then branch
-  int l2 = len("hello");            // uses else branch (no required compile-time context) 
+  constexpr auto l1 = len("hello");  // uses then branch
+  auto l2 = len("hello");            // uses else branch (no required compile-time context)
   std::cout << "l1: " << l1 << '\n';
   std::cout << "l2: " << l2 << '\n';
 }

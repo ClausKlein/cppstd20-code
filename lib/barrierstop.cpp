@@ -20,7 +20,7 @@ using namespace std::literals;  // for duration literals
 
 int main()
 {
-  // initialize and print a collection of floating-point values: 
+  // initialize and print a collection of floating-point values:
   std::vector values{1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0};
 
   // define a lambda function that prints all values
@@ -33,7 +33,7 @@ int main()
                      };
   // print initial values:
   printValues();
-  
+
   // initialize a barrier that prints the values when all threads have done their computations:
   std::barrier allDone{int(values.size()),  // initial value of the counter
                        printValues};        // callback to call whenever the counter is 0
@@ -52,7 +52,7 @@ int main()
                                      }
                                      // remove thread from counter so that other threads don't wait:
                                      allDone.arrive_and_drop();
-                                   }});                       
+                                   }});
   }
   //...
 

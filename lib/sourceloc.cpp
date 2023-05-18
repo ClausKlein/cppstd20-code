@@ -16,7 +16,7 @@
 
 void foo()
 {
-  auto sl = std::source_location::current(); 
+  auto sl = std::source_location::current();
   //...
   std::cout << "file:     " << sl.file_name() << '\n';
   std::cout << "function: " << sl.function_name() << '\n';

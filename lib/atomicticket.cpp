@@ -20,7 +20,7 @@ using namespace std::literals;     // for duration literals
 
 int main()
 {
-  char actChar = 'a';              // character value iterating endless from 'a' to 'z' 
+  char actChar = 'a';              // character value iterating endless from 'a' to 'z'
   std::mutex actCharMx;            // mutex to access actChar
 
   // limit the availability of threads with a ticket system:
@@ -60,7 +60,7 @@ int main()
                                        ++actTicket;
                                        actTicket.notify_all();
                                      }
-                                   }});                       
+                                   }});
   }
 
   // enable and disable threads in the thread pool:
@@ -71,7 +71,7 @@ int main()
                 };
 
   for (int num : {0, 3, 5, 2, 0, 1}) {
-    std::cout << "\n====== enable " << num << " threads" << std::endl;  
+    std::cout << "\n====== enable " << num << " threads" << std::endl;
     adjust(num);
     std::this_thread::sleep_for(2s);
   }

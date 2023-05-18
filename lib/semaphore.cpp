@@ -28,7 +28,7 @@ int main()
   for (int i = 0; i < 1000; ++i) {
     values.push(static_cast<char>('a' + (i % ('z'-'a'))));
   }
-  
+
   // create a pool of numThreads threads:
   // - limit their availability with a semaphore (initially none available):
   constexpr int numThreads = 10;
@@ -64,21 +64,21 @@ int main()
     pool.push_back(std::move(t));
   }
 
-  std::cout << "== wait 2 seconds (no thread enabled)\n" << std::flush;  
+  std::cout << "== wait 2 seconds (no thread enabled)\n" << std::flush;
   std::this_thread::sleep_for(2s);
 
   // enable 3 concurrent threads:
-  std::cout << "== enable 3 parallel threads\n" << std::flush;  
+  std::cout << "== enable 3 parallel threads\n" << std::flush;
   enabled.release(3);
   std::this_thread::sleep_for(2s);
 
   // enable 2 more concurrent threads:
-  std::cout << "\n== enable 2 more parallel threads\n" << std::flush;  
-  enabled.release(2); 
+  std::cout << "\n== enable 2 more parallel threads\n" << std::flush;
+  enabled.release(2);
   std::this_thread::sleep_for(2s);
 
   // Normally we would run forever, but let's end the program here:
-  std::cout << "\n== stop processing\n" << std::flush;  
+  std::cout << "\n== stop processing\n" << std::flush;
   for (auto& t : pool) {
     t.request_stop();
   }

@@ -25,7 +25,7 @@ int main()
   // create and initialize an array of integers with the value 100:
   std::array<int, 1000> values;
   std::fill_n(values.begin(), values.size(), 100);
-  
+
   // initialize a common stop token for all threads:
   std::stop_source allStopSource;
   std::stop_token allStopToken{allStopSource.get_token()};

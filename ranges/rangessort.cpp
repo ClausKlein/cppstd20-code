@@ -25,13 +25,13 @@ void print(const auto& coll) {
 int main()
 {
   std::vector<std::string> coll{"Rio", "Tokyo", "New York", "Berlin"};
-  
+
   std::ranges::sort(coll);     // sort elements
   std::ranges::sort(coll[0]);  // sort character in first element
   print(coll);
 
-  int arr[] = {42, 0, 8, 15, 7};
-  std::ranges::sort(arr);      // sort values in array 
-  print(arr);                 
+  int arr[] = {42, 0, 8, 15, 7};  // NOLINT(hicpp-avoid-c-arrays)
+  std::ranges::sort(arr);      // sort values in array
+  print(arr);
 }
 

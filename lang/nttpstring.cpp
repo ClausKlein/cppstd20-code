@@ -24,14 +24,15 @@ class Logger {
 
 template<std::size_t N>
 struct Str {
-  char chars[N];
+  char chars[N];  // NOLINT(hicpp-avoid-c-arrays)
   const char* value() {
     return chars;
   }
   friend std::ostream& operator<< (std::ostream& strm, const Str& s) {
-    return strm << s.chars;
+    return strm << s.chars;  // NOLINT(hicpp-no-array-decay)
   }
 };
+// NOLINTNEXTLINE(hicpp-avoid-c-arrays)
 template<std::size_t N> Str(const char(&)[N]) -> Str<N>;  // deduction guide
 
 int main()

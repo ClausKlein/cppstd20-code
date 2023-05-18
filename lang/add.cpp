@@ -10,11 +10,9 @@
 //********************************************************
 
 
-#include <iostream>
 #include <vector>
 #include <set>
 #include <ranges>
-#include <atomic>
 
 // concept for container with push_back():
 template<typename Coll>
@@ -27,8 +25,8 @@ template<typename From, typename To>
 concept ConvertsWithoutNarrowing =
     std::convertible_to<From, To> &&
     requires (From&& x) {
-      { std::type_identity_t<To[]>{std::forward<From>(x)} }
-          -> std::same_as<To[1]>;
+      { std::type_identity_t<To[]>{std::forward<From>(x)} }  // NOLINT(hicpp-avoid-c-arrays)
+          -> std::same_as<To[1]>;  // NOLINT(hicpp-avoid-c-arrays)
     };
 
 
@@ -77,7 +75,7 @@ int main()
 
   std::vector<double> dVec;
   add(dVec, 0.7);      // OK: calls push_back() for floating-point types
-  add(dVec, 0.7f);     // OK: calls push_back() for floating-point types
+  //XXX -Wdouble-promotion add(dVec, 0.7F);     // OK: calls push_back() for floating-point types
   //add(dVec, 7);        // ERROR: narrowing
 
   // insert collections:
@@ -85,7 +83,7 @@ int main()
   add(iSet, iVec);     // OK: insert vector elements into a set
 
   // can even insert raw array:
-  int vals[] = {0, 8, 18};
+  int vals[] = {0, 8, 18};  // NOLINT(hicpp-avoid-c-arrays)
   add(iVec, vals);     // OK
   //add(dVec, vals);    // ERROR: narrowing
 }

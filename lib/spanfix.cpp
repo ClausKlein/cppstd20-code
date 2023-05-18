@@ -43,7 +43,7 @@ int main()
   // insert a new element:
   // - must reassign the internal array of the vector if it reallocated new memory
   auto oldCapa = vec.capacity();
-  vec.push_back("Cairo");
+  vec.emplace_back("Cairo");
   if (oldCapa != vec.capacity()) {
     sp3 = std::span<std::string, 3>{vec.data(), 3};
   }

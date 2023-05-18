@@ -18,14 +18,14 @@ class Customer
 {
   std::string name;
  public:
-  Customer(const std::string& n)
-   : name{n} {
+  Customer(std::string n)
+   : name{std::move(n)} {
   }
   Customer(const char* n)
    : name{n} {
   }
   //...
-  std::string getName() const {
+  [[nodiscard]] std::string getName() const {
     return name;
   }
   bool operator== (const Customer& c) const {
@@ -33,7 +33,7 @@ class Customer
   }
   //...
 };
-  
+
 int main()
 {
   // create hash table with user-defined hash function:
@@ -42,9 +42,9 @@ int main()
                                 return std::hash<std::string>{}(c.getName());
                               })> coll;  // OK since C++20
 
-  coll.insert({"Tom", "Andrea", "Sam"});
+  coll.insert({std::string("Tom"), std::string("Andrea"), std::string("Sam")});
   coll.insert({"Kim", "Hans", "Sarah", "Bill"});
-  
+
   for (const auto& c : coll) {
     std::cout << c.getName() << '\n';
   }

@@ -15,9 +15,9 @@
 #include <cassert>
 
 struct Tax {
-  double value;
+  const double value;
 
-  constexpr Tax(double v)
+  constexpr explicit Tax(double v)
    : value{v} {
       assert(v >= 0 && v < 1);
   }
@@ -30,7 +30,7 @@ struct Tax {
 template<Tax Vat>
 int addTax(int value)
 {
-  return static_cast<int>(std::round(value * (1 + Vat.value))); 
+  return static_cast<int>(std::round(value * (1 + Vat.value)));
 }
 
 int main()

@@ -16,7 +16,7 @@
 
 int main()
 {
-  int arr[] = {0, 8, 15, 42, 7};
+  int arr[] = {0, 8, 15, 42, 7};  // NOLINT(hicpp-avoid-c-arrays)
 
   // max value of a filtered range:
   auto odd = [] (auto val) {                      // predicate for odd values

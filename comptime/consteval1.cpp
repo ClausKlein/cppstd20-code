@@ -14,9 +14,9 @@
 #include <array>
 
 constexpr
-bool isPrime(int value)
+bool isPrime(size_t value)
 {
-  for (int i = 2; i <= value/2; ++i) {
+  for (size_t i = 2; i <= value/2; ++i) {
     if (value % i == 0) {
       return false;
     }
@@ -24,13 +24,13 @@ bool isPrime(int value)
   return value > 1;  // 0 and 1 are not prime numbers
 }
 
-template<int Num>
+template<size_t Num>
 consteval
-std::array<int, Num> primeNumbers()
+std::array<size_t, Num> primeNumbers()
 {
-  std::array<int, Num> primes{};
-  int idx = 0;
-  for (int val = 1; idx < Num; ++val) {
+  std::array<size_t, Num> primes{};
+  size_t idx = 0;
+  for (size_t val = 1; idx < Num; ++val) {
     if (isPrime(val)) {
       primes[idx++] = val;
     }

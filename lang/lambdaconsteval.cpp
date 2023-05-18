@@ -15,8 +15,8 @@
 
 int main()
 {
-  auto isPrime = [](int value) constexpr {
-                   for (int i = 2; i <= value/2; ++i) {
+  auto isPrime = [](size_t value) constexpr {
+                   for (size_t i = 2; i <= value/2; ++i) {
                      if (value % i == 0) {
                        return false;
                      }
@@ -25,10 +25,10 @@ int main()
                  };
 
   // local compile-time computation of Num prime numbers:
-  auto primeNumbers = [isPrime] <int Num> () consteval {
-                        std::array<int, Num> primes{};
-                        int idx = 0;
-                        for (int val = 1; idx < Num; ++val) {
+  auto primeNumbers = [isPrime] <size_t Num> () consteval {
+                        std::array<size_t, Num> primes{};
+                        size_t idx = 0;
+                        for (size_t val = 1; idx < Num; ++val) {
                           if (isPrime(val)) {
                             primes[idx++] = val;
                           }

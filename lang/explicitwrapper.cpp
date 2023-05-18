@@ -14,9 +14,9 @@
 #include <string>
 #include <vector>
 
-void printStringWrapper(Wrapper<std::string>) {
+void printStringWrapper(const Wrapper<std::string>& /*unused*/) {
 }
-void printVectorWrapper(Wrapper<std::vector<std::string>>) {
+void printVectorWrapper(const Wrapper<std::vector<std::string>>& /*unused*/) {
 }
 
 int main()
@@ -29,10 +29,10 @@ int main()
   printStringWrapper("hello");                    // OK
 
   // NO implicit conversion from size to vector<string>:
-  std::vector<std::string> v1{42u};
-  //XXX std::vector<std::string> v2 = 42u;              // ERROR: explicit
-  Wrapper<std::vector<std::string>> wv1{42u};
-  //XXX Wrapper<std::vector<std::string>> wv2 = 4u2;    // ERROR: explicit
-  //XXX printVectorWrapper(42u);                        // ERROR: explicit
+  std::vector<std::string> v1{42U};
+  //XXX std::vector<std::string> v2 = 42U;              // ERROR: explicit
+  Wrapper<std::vector<std::string>> wv1{42U};
+  //XXX Wrapper<std::vector<std::string>> wv2 = 42U;    // ERROR: explicit
+  //XXX printVectorWrapper(42U);                        // ERROR: explicit
 }
 

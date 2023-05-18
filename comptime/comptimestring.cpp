@@ -17,7 +17,7 @@
 #include "asstring.hpp"
 
 // function template to export a compile-time string to runtime:
-template<int MaxSize>
+template<size_t MaxSize>
 consteval auto toRuntimeString(std::string s)
 {
   // ensure the size of the exported array is large enough:

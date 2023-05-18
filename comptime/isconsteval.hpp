@@ -14,17 +14,17 @@
 #include <type_traits>
 #include <cstring>
 
-constexpr int len(const char* s)
+constexpr size_t len(const char* s)
 {
   if (std::is_constant_evaluated()) {
-    int idx = 0;
-    while (s[idx] != '\0') {      // compile-time friendly code 
+    size_t idx = 0;
+    while (s[idx] != '\0') {      // compile-time friendly code
       ++idx;
     }
     return idx;
   }
   else {
-    return std::strlen(s);        // function called at runtime 
+    return std::strlen(s);        // function called at runtime
   }
 }
 

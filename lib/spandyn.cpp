@@ -43,17 +43,17 @@ int main()
   // insert a new element:
   // - must reassign the internal array of the vector if it reallocated new memory
   auto oldCapa = vec.capacity();
-  vec.push_back("Cairo");
+  vec.emplace_back("Cairo");
   if (oldCapa != vec.capacity()) {
     sp = std::span{vec.data(), 3};
   }
-  std::cout << "first 3 after push_back(): ";
+  std::cout << "first 3 after emplace_back(): ";
   printSpan(sp);
 
   // let span refer to the vector as a whole:
   sp = vec;
   std::cout << "all:    ";
-  printSpan(sp);  
+  printSpan(sp);
 
   // let span refer to the last five elements:
   sp = std::span{vec.end()-5, vec.end()};

@@ -15,14 +15,16 @@
 #include <sstream>
 #include <charconv>
 #include <chrono>
+#include <version>
+
 #ifdef __cpp_lib_format
 #include <format>
 #else
 #include <fmt/format.h>
 #endif
 
-static void checkSPrintf(int num) { 
-  for (int idx = 0; idx < num; ++idx) { 
+static void checkSPrintf(int num) {
+  for (int idx = 0; idx < num; ++idx) {
     int i = 42;
     double d = 7.7;
     char buf[100] = {'?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?'};
@@ -34,8 +36,8 @@ static void checkSPrintf(int num) {
   }
 }
 
-static void checkOStringStream(int num) { 
-  for (int idx = 0; idx < num; ++idx) { 
+static void checkOStringStream(int num) {
+  for (int idx = 0; idx < num; ++idx) {
     int i = 42;
     double d = 7.7;
     std::ostringstream os;
@@ -47,8 +49,8 @@ static void checkOStringStream(int num) {
   }
 }
 
-static void checkToString(int num) { 
-  for (int idx = 0; idx < num; ++idx) { 
+static void checkToString(int num) {
+  for (int idx = 0; idx < num; ++idx) {
     int i = 42;
     double d = 7.7;
     std::string s = std::to_string(i) + ' ' + std::to_string(d);
@@ -59,8 +61,8 @@ static void checkToString(int num) {
   }
 }
 
-static void checkToChars(int num) { 
-  for (int idx = 0; idx < num; ++idx) { 
+static void checkToChars(int num) {
+  for (int idx = 0; idx < num; ++idx) {
     int i = 42;
     double d = 7.7;
     char buf[100] = {'?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?'};
@@ -75,14 +77,14 @@ static void checkToChars(int num) {
   }
 }
 
-static void checkFormat(int num) { 
-  for (int idx = 0; idx < num; ++idx) { 
+static void checkFormat(int num) {
+  for (int idx = 0; idx < num; ++idx) {
     int i = 42;
     double d = 7.7;
 #ifdef __cpp_lib_format
     auto s = std::format("{} {}", i, d);
 #else
-    auto s = fmt::v8::format("{} {}", i, d);
+    auto s = fmt::v10::format("{} {}", i, d);
 #endif
     if (num == 1) {
       std::cout << s << '\n';
@@ -91,8 +93,8 @@ static void checkFormat(int num) {
   }
 }
 
-static void checkFormatTo(int num) { 
-  for (int idx = 0; idx < num; ++idx) { 
+static void checkFormatTo(int num) {
+  for (int idx = 0; idx < num; ++idx) {
     int i = 42;
     double d = 7.7;
     char buf[100] = {'?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?'};
@@ -100,7 +102,7 @@ static void checkFormatTo(int num) {
     auto ret = std::format_to_n(buf, 99, "{} {}", i, d);
     *(ret.out) = '\0';
 #else
-    auto ret = fmt::v8::format_to(buf, "{} {}", i, d);
+    auto ret = fmt::v10::format_to(buf, "{} {}", i, d);
     *ret = '\0';
 #endif
     if (num == 1) {
@@ -115,7 +117,7 @@ template<typename T>
 void measure(std::string s, T func)
 {
   auto t0 = std::chrono::steady_clock::now();
-  func(1000);    // measure 
+  func(1000);    // measure
   auto t1 = std::chrono::steady_clock::now();
   std::chrono::duration<double, std::milli> diff{t1 - t0};
   std::cout << s << ": " << diff.count() << "ms\n ";

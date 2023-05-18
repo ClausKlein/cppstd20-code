@@ -55,13 +55,13 @@ int main()
     syncOut() << "- STOP requested in main()\n" << std::flush;
   }};
 
-  // in the background call task() a bunch of times: 
+  // in the background call task() a bunch of times:
   auto fut = std::async([stok] {
                           for (int num = 1; num < 10; ++num) {
                             task(stok, num);
                           }
                         });
-  
+
   // after a while, request stop:
   std::this_thread::sleep_for(120ms);
   ssrc.request_stop();

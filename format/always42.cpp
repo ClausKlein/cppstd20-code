@@ -19,10 +19,10 @@ int main()
   try {
     Always42 val;
     std::cout << val.getValue() << '\n';
-    std::cout << std::format("Value: {}\n", val); 
-    std::cout << std::format("Twice: {0} {0}\n", val); 
-    std::cout << std::format("With width: '{:7}'\n", val); 
-    std::cout << std::format("With all:   '{:.^7}'\n", val); 
+    std::cout << std::format("Value: {}\n", val);
+    std::cout << std::format("Twice: {0} {0}\n", val);
+    std::cout << std::format("With width: '{:7}'\n", val);
+    std::cout << std::format("With all:   '{:.^7}'\n", val);
   }
   catch (std::format_error& e) {
     std::cerr << "Format Error: " << e.what() << std::endl;

@@ -57,7 +57,7 @@ int main()
      std::begin(m);            // OK: MemberBegin::begin()
      //std::begin(g);          // ERROR: begin(GlobalBegin) not found
      //std::begin(n);          // ERROR: nd::begin(ns::NsBegin) not found
-     std::begin(s);            // OK: std::begin(NsStdBegin)
+     //FIXME(CK) std::begin(s);            // OK: std::begin(NsStdBegin)
      //std::begin(dir);        // ERROR: doesn't work for filesystem iterators
    }
 

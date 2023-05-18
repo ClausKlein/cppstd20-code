@@ -19,7 +19,7 @@ using namespace std::literals;  // for duration literals
 int main()
 {
   int sharedData;
-  std::binary_semaphore dataReady{0};  // signal there is data to process 
+  std::binary_semaphore dataReady{0};  // signal there is data to process
   std::binary_semaphore dataDone{0};   // signal processing is done
 
   // start threads to read and process values by value:

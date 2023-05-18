@@ -16,16 +16,28 @@
 
 struct Foo {
   Foo() = default;
+  ~Foo() = default;
 
-  Foo(const Foo&) {
+  Foo(const Foo& /*unused*/) {
     std::cout << " COPY constructor\n";
   }
-  Foo& operator=(const Foo&) {
+
+#if 0
+  Foo(const Foo&& /*unused*/) {
+    std::cout << " MOVE constructor\n";
+  }
+  Foo& operator=(const Foo&& /*unused*/) {
+    std::cout << " MOVE assignment\n";
+    return *this;
+  }
+#endif
+
+  Foo& operator=(const Foo& /*unused*/) {
     std::cout << " COPY assignment\n";
     return *this;
   }
 
-  void swap(Foo&) {
+  void swap(Foo& /*unused*/) {
     std::cout << " efficient swap()\n";  // swaps pointers, no data
   }
 };
@@ -36,7 +48,9 @@ void swap(Foo& a, Foo& b) {
 
 int main()
 {
-  Foo a, b;
+  Foo a;
+  Foo b(a);
+  a = b;
 
   std::cout << "--- std::swap()\n";
   std::swap(a, b);          // generic swap called
