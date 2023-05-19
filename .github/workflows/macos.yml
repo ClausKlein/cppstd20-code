@@ -13,8 +13,8 @@ jobs:
       fail-fast: false
       matrix:
         compiler:
-          - {cc: "gcc-13", cxx: "g++-13"}
-          - {cc: "clang-16", cxx: "clang++-16"}
+          - {cxx: "g++-13"}
+          - {cxx: "clang++"}
         type: [static, shared]
         build_type: [Debug]
         cxx_std: [20, 23]
