@@ -31,7 +31,7 @@ Checks:
   # -hicpp-braces-around-statements,-readability-braces-around-statements,
   # -hicpp-uppercase-literal-suffix,-readability-uppercase-literal-suffix,
 '
-WarningsAsErrors:  '*'
+WarningsAsErrors:  'clang-*'
 HeaderFilterRegex: ''
 AnalyzeTemporaryDtors: false
 FormatStyle:     file

@@ -24,7 +24,7 @@ void Customer::print() const
   // print order entries:
   for (const auto& od : orders) {
     std::cout << std::format("{:3} {:14} {:6.2f} {:6.2f}\n",
-                             od.count, od.name, od.price, od.count * od.price);             
+                             od.count, od.name, od.price, od.count * od.price);
   }
   // print sum:
   std::cout << std::format("{:25} ------\n", ' ');

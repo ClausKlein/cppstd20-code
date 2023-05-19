@@ -9,13 +9,16 @@
 //  http://creativecommons.org/licenses/by/4.0/
 //********************************************************
 
+module;              // start module unit with global module fragment
+
+#include <vector>    // NOTE: clang/gcc needs this! CK
 
 module Mod1;         // implementation unit of module Mod1
 
 double Customer::sumPrice() const
 {
   double sum = 0.0;
-  for (const Order& od : orders) {
+  for (const auto& od : orders) {
     sum += od.count * od.price;
   }
   return sum;
