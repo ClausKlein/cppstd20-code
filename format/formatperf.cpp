@@ -61,6 +61,8 @@ static void checkToString(int num) {
   }
 }
 
+// FIXME: error: 'to_chars' is unavailable: introduced in macOS 13.3
+#ifndef __APPLE__
 static void checkToChars(int num) {
   for (int idx = 0; idx < num; ++idx) {
     int i = 42;
@@ -76,6 +78,7 @@ static void checkToChars(int num) {
     }
   }
 }
+#endif
 
 static void checkFormat(int num) {
   for (int idx = 0; idx < num; ++idx) {
@@ -130,7 +133,11 @@ int main()
   measure("sprintf()    ", checkSPrintf);
   measure("ostringstream", checkOStringStream);
   measure("to_string()  ", checkToString);
+
+#ifndef __APPLE__
   measure("to_chars()   ", checkToChars);
+#endif
+
   measure("format()     ", checkFormat);
   measure("format_to()  ", checkFormatTo);
 }

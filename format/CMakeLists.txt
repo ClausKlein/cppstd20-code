@@ -14,7 +14,7 @@ endif()
 
 add_tests(cxx_sources)
 
-if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   target_link_libraries(formatperf PRIVATE fmt::fmt)
   target_link_libraries(formatbool PRIVATE fmt::fmt)
   target_link_libraries(formatgerman PRIVATE fmt::fmt)
