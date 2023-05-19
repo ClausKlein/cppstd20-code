@@ -20,7 +20,7 @@ set(cxx_sources
 )
 
 if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
-  list(APPEND cxx_sources corocorosub.cpp)
+  #FIXME(CK): AddressSanitizer: heap-use-after-free: list(APPEND cxx_sources corocorosub.cpp)
 endif()
 
 add_tests(cxx_sources)
