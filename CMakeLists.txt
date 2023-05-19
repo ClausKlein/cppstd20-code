@@ -48,6 +48,7 @@ cpmaddpackage(
   SYSTEM
   YES
 )
+target_disable_clang_tidy(fmt)
 
 target_compile_features(project_options INTERFACE cxx_std_${CMAKE_CXX_STANDARD})
 
@@ -56,8 +57,8 @@ enable_testing()
 # ---- Setup experimental cmake C++20 module support ----
 
 # see https://releases.llvm.org/15.0.0/projects/libcxx/docs/ReleaseNotes.html
-add_compile_options(-fexperimental-library)
-add_link_options(-lc++experimental)
+#XXX add_compile_options(-fexperimental-library)
+#XXX add_link_options(-lc++experimental)
 
 set(CMAKE_EXPERIMENTAL_CXX_MODULE_CMAKE_API 2182bf5c-ef0d-489a-91da-49dbc3090d2a)
 set(CMake_TEST_CXXModules_UUID "a246741c-d067-4019-a8fb-3d16b0c9d1d3")

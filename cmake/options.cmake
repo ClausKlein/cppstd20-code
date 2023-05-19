@@ -15,17 +15,20 @@ option(OPTION_ENABLE_UNITY "Enable Unity builds of project" OFF)
 option(OPTION_ENABLE_CLANG_TIDY "Enable clang-tdiy as prebuild step" OFF)
 option(BUILD_SHARED_LIBS "Global flag to cause add_library() to create shared libraries if on." OFF)
 
-if(APPLE)
-  set(OPTION_ENABLED_SANITIZER
-      "ENABLE_SANITIZER_ADDRESS; ENABLE_SANITIZER_UNDEFINED_BEHAVIOR"
-      CACHE STRING "Enabled sanitizer for debug build"
-  )
-else()
-  set(OPTION_ENABLED_SANITIZER
-      "ENABLE_SANITIZER_MEMORY"
-      CACHE STRING "Enabled sanitizer for debug build"
-  )
+if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+  if(APPLE)
+    set(OPTION_ENABLED_SANITIZER
+        "ENABLE_SANITIZER_ADDRESS; ENABLE_SANITIZER_UNDEFINED_BEHAVIOR"
+        CACHE STRING "Enabled sanitizer for debug build"
+    )
+  else()
+    set(OPTION_ENABLED_SANITIZER
+        "ENABLE_SANITIZER_MEMORY"
+        CACHE STRING "Enabled sanitizer for debug build"
+    )
+  endif()
 endif()
+
 option(OPTION_ENABLE_COVERAGE "Enable test coverage of projects" OFF)
 if(OPTION_ENABLE_COVERAGE)
   set(ENABLE_COVERAGE "ENABLE_COVERAGE")
@@ -43,16 +46,15 @@ include(${CMAKE_CURRENT_LIST_DIR}/CPM.cmake)
 
 cpmaddpackage("gh:aminya/project_options@0.29.0")
 list(APPEND CMAKE_MODULE_PATH ${project_options_SOURCE_DIR}/src)
-#XXX include(StaticAnalyzers) # for target_disable_clang_tidy() and enable_clang_tidy()
 
 # Disable clang-tidy for target
-# macro(target_disable_clang_tidy TARGET)
-#   find_program(CLANGTIDY clang-tidy)
-#   if(CLANGTIDY)
-#     set_target_properties(${TARGET} PROPERTIES C_CLANG_TIDY "")
-#     set_target_properties(${TARGET} PROPERTIES CXX_CLANG_TIDY "")
-#   endif()
-# endmacro()
+macro(target_disable_clang_tidy TARGET)
+  find_program(CLANGTIDY clang-tidy)
+  if(CLANGTIDY)
+    set_target_properties(${TARGET} PROPERTIES C_CLANG_TIDY "")
+    set_target_properties(${TARGET} PROPERTIES CXX_CLANG_TIDY "")
+  endif()
+endmacro()
 
 macro(check_system_property DIRECTORY)
   get_property(

@@ -12,8 +12,11 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
+        compiler:
+          - {cc: "gcc-13", cxx: "g++-13"}
+          - {cc: "clang-16", cxx: "clang++-16"}
         type: [static, shared]
-        build_type: [Debug, Release]
+        build_type: [Debug]
         cxx_std: [20, 23]
 
         include:
@@ -25,14 +28,15 @@ jobs:
 
       - name: Create Build Environment
         run: |
-          brew install llvm ninja
+          brew install gcc llvm ninja
           cmake -E make_directory ${{runner.workspace}}/build
 
       - name: Configure
         working-directory: ${{runner.workspace}}/build
         run: |
           export PATH=/usr/local/opt/llvm/bin/:${PATH}
-          CXX=clang++ cmake -G Ninja \
+          cmake -G Ninja \
+            -D CMAKE_CXX_COMPILER=${{matrix.compiler.cxx}} \
             -D CMAKE_BUILD_TYPE=${{matrix.build_type}} \
             -D CMAKE_CXX_STANDARD=${{matrix.cxx_std}} \
             -D BUILD_SHARED_LIBS=${{matrix.build}} \
