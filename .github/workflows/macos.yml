@@ -1,0 +1,52 @@
+---
+name: macos
+
+on: [push, pull_request]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: macos-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        type: [static, shared]
+        build_type: [Debug, Release]
+        cxx_std: [20, 23]
+
+        include:
+          - {type: static, build: NO}
+          - {type: shared, build: YES}
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Create Build Environment
+        run: |
+          brew install llvm ninja
+          cmake -E make_directory ${{runner.workspace}}/build
+
+      - name: Configure
+        working-directory: ${{runner.workspace}}/build
+        run: |
+          export PATH=/usr/local/opt/llvm/bin/:${PATH}
+          CXX=clang++ cmake -G Ninja \
+            -D CMAKE_BUILD_TYPE=${{matrix.build_type}} \
+            -D CMAKE_CXX_STANDARD=${{matrix.cxx_std}} \
+            -D BUILD_SHARED_LIBS=${{matrix.build}} \
+            $GITHUB_WORKSPACE
+
+      - name: Build
+        working-directory: ${{runner.workspace}}/build
+        run: |
+          export PATH=/usr/local/opt/llvm/bin/:${PATH}
+          threads=`sysctl -n hw.logicalcpu`
+          cmake --build . --config ${{matrix.build_type}} --parallel $threads
+
+      - name: Test
+        working-directory: ${{runner.workspace}}/build
+        run: ctest -C ${{matrix.build_type}}
+        env:
+          CTEST_OUTPUT_ON_FAILURE: True
