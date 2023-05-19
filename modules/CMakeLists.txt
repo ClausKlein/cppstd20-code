@@ -27,6 +27,7 @@ target_sources(
   PUBLIC FILE_SET cxx_modules TYPE CXX_MODULES FILES mod1/mod1.cppm
 )
 set_target_properties(mod1 PROPERTIES CXX_STANDARD ${CMAKE_CXX_STANDARD})
+target_link_libraries(mod1 PUBLIC fmt::fmt)
 if(CMAKE_SKIP_INSTALL_RULES AND CMAKE_BUILD_TYPE STREQUAL "Debug")
   target_link_libraries(mod1 PUBLIC $<BUILD_INTERFACE:project_warnings project_options>)
 endif()
@@ -74,6 +75,7 @@ target_sources(
          mod3/mod3order.cppm
 )
 set_target_properties(mod3 PROPERTIES CXX_STANDARD ${CMAKE_CXX_STANDARD})
+target_link_libraries(mod3 PUBLIC fmt::fmt)
 if(CMAKE_SKIP_INSTALL_RULES AND CMAKE_BUILD_TYPE STREQUAL "Debug")
   target_link_libraries(mod3 PUBLIC $<BUILD_INTERFACE:project_warnings project_options>)
 endif()

@@ -9,4 +9,6 @@ set(cxx_sources
 
 add_tests(cxx_sources)
 
+target_link_libraries(formatbool PRIVATE fmt::fmt)
+target_link_libraries(formatgerman PRIVATE fmt::fmt)
 target_link_libraries(formatperf PRIVATE fmt::fmt)

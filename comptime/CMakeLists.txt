@@ -13,3 +13,5 @@ set(cxx_sources
 )
 
 add_tests(cxx_sources)
+
+target_link_libraries(comptimestring PRIVATE fmt::fmt)
