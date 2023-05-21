@@ -12,12 +12,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # windows-2019 has MSVC 2019 installed;
-        # windows-2022 has MSVC 2022 installed:
-        # https://github.com/actions/virtual-environments.
-        os: [windows-2022]
+        os: [windows-latest]
         platform: [Win32, x64]
-        toolset: [v140, v141, v142]
+        #XXX toolset: [v141, v142]
         cxx_standard: [20, 23]
         shared: ["", -DBUILD_SHARED_LIBS=ON]
         build_type: [Debug]
@@ -33,7 +30,7 @@ jobs:
         shell: bash
         working-directory: ${{runner.workspace}}/build
         run: |
-          cmake -A ${{matrix.platform}} -T ${{matrix.toolset}} \
+          cmake -A ${{matrix.platform}} \
                 -DCMAKE_CXX_STANDARD=${{matrix.cxx_standard}} \
                 ${{matrix.shared}} -DCMAKE_BUILD_TYPE=${{matrix.build_type}} \
                 $GITHUB_WORKSPACE

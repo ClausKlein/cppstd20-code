@@ -3,7 +3,9 @@ cmake_minimum_required(VERSION 3.26)
 #---------------------------------------------------------------------------------------
 # Compiler config
 #---------------------------------------------------------------------------------------
-set(CMAKE_CXX_STANDARD 20)
+if(NOT DEFINED CMAKE_CXX_STANDARD)
+  set(CMAKE_CXX_STANDARD 20)
+endif()
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
@@ -81,11 +83,19 @@ elseif(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
   set(CMAKE_CXX_COMPILE_OBJECT "${CMAKE_CXX_COMPILE_OBJECT} @<OBJECT>.modmap")
 
   add_subdirectory(modules)
+elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+  set(CMAKE_EXPERIMENTAL_CXX_MODULE_DYNDEP 1)
+
+  add_subdirectory(modules)
 endif()
 
 add_subdirectory(coro)
 add_subdirectory(comptime)
 add_subdirectory(format)
 add_subdirectory(lang)
-add_subdirectory(lib)
+
+if(NOT CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+  add_subdirectory(lib)
+endif()
+
 add_subdirectory(ranges)
