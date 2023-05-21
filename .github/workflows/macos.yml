@@ -1,7 +1,7 @@
 ---
 name: macos
 
-on: [push, pull_request]
+on: [pull_request]
 
 permissions:
   contents: read
@@ -10,7 +10,7 @@ jobs:
   build:
     runs-on: macos-latest
     strategy:
-      fail-fast: false
+      fail-fast: true
       matrix:
         compiler:
           - {cxx: "g++-13"}
