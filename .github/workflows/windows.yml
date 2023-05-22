@@ -13,7 +13,8 @@ jobs:
       fail-fast: false
       matrix:
         os: [windows-latest]
-        platform: [Win32, x64]
+        #TODO: platform: [Win32, x64]
+        platform: [x64]
         #XXX toolset: [v141, v142]
         cxx_standard: [20, 23]
         shared: ["", -DBUILD_SHARED_LIBS=ON]

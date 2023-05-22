@@ -18,7 +18,11 @@ target_link_libraries(mod0main mod0)
 add_test(NAME mod0main COMMAND mod0main)
 
 #
-# module with implementation
+# module with implementation:
+# If you are using CMake to generate your Visual Studio solutions,
+# remove the module implementation sources from the CXX_MODULES FILE_SET.
+# You are using a module file extension like .ixx or .cppm for the module implementation source file,
+# change the file extension to a non-module file extension like .cpp!
 #
 add_library(mod1)
 target_sources(
@@ -36,7 +40,7 @@ target_link_libraries(testmod1 mod1)
 add_test(NAME testmod1 COMMAND testmod1)
 
 #
-# module with one internal partion
+# module with one internal partition
 #
 add_library(mod2)
 target_sources(
@@ -59,7 +63,7 @@ target_link_libraries(testmod2 mod2)
 add_test(NAME testmod2 COMMAND testmod2)
 
 #
-# module with internal partions
+# module with internal partitions
 #
 add_library(mod3)
 target_sources(
