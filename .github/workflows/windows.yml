@@ -31,7 +31,8 @@ jobs:
         shell: bash
         working-directory: ${{runner.workspace}}/build
         run: |
-          cmake -A ${{matrix.platform}} \
+          cmake -G Ninja -DCMAKE_SYSTEM_PROCESSOR=${{matrix.platform}} \
+                -DCMAKE_TOOLCHAIN_FILE=cmake/Windows.MSVC.toolchain.cmake \
                 -DCMAKE_CXX_STANDARD=${{matrix.cxx_standard}} \
                 ${{matrix.shared}} -DCMAKE_BUILD_TYPE=${{matrix.build_type}} \
                 $GITHUB_WORKSPACE

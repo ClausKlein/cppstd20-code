@@ -41,6 +41,8 @@ add_test(NAME testmod1 COMMAND testmod1)
 
 #
 # module with one internal partition
+# see too:
+# https://learn.microsoft.com/en-us/cpp/build/reference/internal-partition?view=msvc-170
 #
 add_library(mod2)
 target_sources(
@@ -52,7 +54,7 @@ target_sources(
          CXX_MODULES
          FILES
          mod2/mod2.cppm
-         mod2/mod2order.cppm
+         mod2/mod2order.cppm # internal partition
 )
 set_target_properties(mod2 PROPERTIES CXX_STANDARD ${CMAKE_CXX_STANDARD})
 if(CMAKE_SKIP_INSTALL_RULES AND CMAKE_BUILD_TYPE STREQUAL "Debug")
@@ -63,7 +65,7 @@ target_link_libraries(testmod2 mod2)
 add_test(NAME testmod2 COMMAND testmod2)
 
 #
-# module with internal partitions
+# module with partitions
 #
 add_library(mod3)
 target_sources(
@@ -75,8 +77,8 @@ target_sources(
          CXX_MODULES
          FILES
          mod3/mod3.cppm
-         mod3/mod3customer.cppm
-         mod3/mod3order.cppm
+         mod3/mod3customer.cppm # interface partition
+         mod3/mod3order.cppm    # internal partition
 )
 set_target_properties(mod3 PROPERTIES CXX_STANDARD ${CMAKE_CXX_STANDARD})
 target_link_libraries(mod3 PUBLIC fmt::fmt)
