@@ -1,7 +1,13 @@
 ---
 name: macos
 
-on: [pull_request]
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+      - develop
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -29,6 +35,7 @@ jobs:
       - name: Create Build Environment
         run: |
           brew install gcc llvm ninja
+          cmake --version
           cmake -E make_directory ${{runner.workspace}}/build
 
       - name: Configure
@@ -51,6 +58,6 @@ jobs:
 
       - name: Test
         working-directory: ${{runner.workspace}}/build
-        run: ctest -C ${{matrix.build_type}}
+        run: ctest -C ${{matrix.build_type}} --timeout 60
         env:
           CTEST_OUTPUT_ON_FAILURE: True

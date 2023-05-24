@@ -25,7 +25,7 @@ set(cxx_sources
     rangessort.cpp
     refview.cpp
     results.cpp
-    reversecache.cpp
+    #XXX reversecache.cpp
     reverseview.cpp
     sentinel1.cpp
     sentinel2.cpp

@@ -1,7 +1,13 @@
 ---
 name: windows
 
-on: [pull_request]
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+      - develop
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -13,9 +19,8 @@ jobs:
       fail-fast: false
       matrix:
         os: [windows-latest]
-        #TODO: platform: [Win32, x64]
+        # TODO: platform: [Win32, x64]
         platform: [x64]
-        #XXX toolset: [v141, v142]
         cxx_standard: [20, 23]
         shared: ["", -DBUILD_SHARED_LIBS=ON]
         build_type: [Debug]
@@ -49,6 +54,6 @@ jobs:
 
       - name: Test
         working-directory: ${{runner.workspace}}/build
-        run: ctest -C ${{matrix.build_type}} -V
+        run: ctest -C ${{matrix.build_type}} --timeout 60
         env:
           CTEST_OUTPUT_ON_FAILURE: True
