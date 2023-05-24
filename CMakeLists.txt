@@ -85,6 +85,7 @@ elseif(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
   add_subdirectory(modules)
 elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
   set(CMAKE_EXPERIMENTAL_CXX_MODULE_DYNDEP 1)
+  set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS 1)
 
   add_subdirectory(modules)
 endif()
