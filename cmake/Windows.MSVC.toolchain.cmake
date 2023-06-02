@@ -39,8 +39,6 @@
 # | CMAKE_WINDOWS_KITS_10_DIR                   | The location of the root of the Windows Kits 10 directory.                                                               |
 # | VS_EXPERIMENTAL_MODULE                      | Whether experimental module support should be enabled.
 # | VS_USE_SPECTRE_MITIGATION_RUNTIME           | Whether the compiler should link with a runtime that uses 'Spectre' mitigations. Defaults to 'OFF'.                      |
-# | NINJA_PATH                                  | The path to the ninja program. Defaults not set.                                                                         |
-# | NUGET_PATH                                  | The path to the nuget program. Defaults not set.                                                                         |
 #
 # The toolchain file will set the following variables:
 #
@@ -82,8 +80,6 @@ set(CMAKE_CROSSCOMPILING TRUE)
 set(WIN32 1)
 set(MSVC 1)
 
-include("${CMAKE_CURRENT_LIST_DIR}/Ninja.cmake")
-include("${CMAKE_CURRENT_LIST_DIR}/NuGet.cmake")
 include("${CMAKE_CURRENT_LIST_DIR}/VSWhere.cmake")
 
 if(NOT CMAKE_SYSTEM_PROCESSOR)
@@ -112,13 +108,18 @@ endif()
 
 # Find Visual Studio
 #
-findVisualStudio(
-    VERSION ${CMAKE_VS_VERSION_RANGE}
-    PRERELEASE ${CMAKE_VS_VERSION_PRERELEASE}
-    PRODUCTS ${CMAKE_VS_PRODUCTS}
+findvisualstudio(
+    VERSION
+    ${CMAKE_VS_VERSION_RANGE}
+    PRERELEASE
+    ${CMAKE_VS_VERSION_PRERELEASE}
+    PRODUCTS
+    ${CMAKE_VS_PRODUCTS}
     PROPERTIES
-        installationVersion VS_INSTALLATION_VERSION
-        installationPath VS_INSTALLATION_PATH
+    installationVersion
+    VS_INSTALLATION_VERSION
+    installationPath
+    VS_INSTALLATION_PATH
 )
 
 message(VERBOSE "VS_INSTALLATION_VERSION = ${VS_INSTALLATION_VERSION}")
@@ -133,8 +134,18 @@ cmake_path(NORMAL_PATH VS_INSTALLATION_PATH)
 set(VS_MSVC_PATH "${VS_INSTALLATION_PATH}/VC/Tools/MSVC")
 
 if(NOT VS_PLATFORM_TOOLSET_VERSION)
-    file(GLOB VS_TOOLSET_VERSIONS RELATIVE ${VS_MSVC_PATH} ${VS_MSVC_PATH}/*)
-    list(SORT VS_TOOLSET_VERSIONS COMPARE NATURAL ORDER DESCENDING)
+    file(
+        GLOB
+        VS_TOOLSET_VERSIONS
+        RELATIVE
+        ${VS_MSVC_PATH}
+        ${VS_MSVC_PATH}/*
+    )
+    list(
+        SORT VS_TOOLSET_VERSIONS
+        COMPARE NATURAL
+        ORDER DESCENDING
+    )
     list(POP_FRONT VS_TOOLSET_VERSIONS VS_TOOLSET_VERSION)
 endif()
 
@@ -155,29 +166,38 @@ function(getMsvcVersion COMPILER MSVC_VERSION_OUTPUT)
         set(COMPILER_VERSION_MINOR ${CMAKE_MATCH_3})
     endif()
 
-    set(${MSVC_VERSION_OUTPUT} "${COMPILER_VERSION_MAJOR}${COMPILER_VERSION_MINOR}" PARENT_SCOPE)
+    set(${MSVC_VERSION_OUTPUT}
+        "${COMPILER_VERSION_MAJOR}${COMPILER_VERSION_MINOR}"
+        PARENT_SCOPE
+    )
 endfunction()
 
 # Map CMAKE_SYSTEM_PROCESSOR values to CMAKE_VS_PLATFORM_TOOLSET_ARCHITECTURE that identifies the tools that should
 # be used to produce code for the CMAKE_SYSTEM_PROCESSOR.
 if((CMAKE_SYSTEM_PROCESSOR STREQUAL AMD64) OR (CMAKE_SYSTEM_PROCESSOR STREQUAL x64))
     set(CMAKE_VS_PLATFORM_TOOLSET_ARCHITECTURE x64)
-elseif((CMAKE_SYSTEM_PROCESSOR STREQUAL arm)
+elseif(
+    (CMAKE_SYSTEM_PROCESSOR STREQUAL arm)
     OR (CMAKE_SYSTEM_PROCESSOR STREQUAL arm64)
-    OR (CMAKE_SYSTEM_PROCESSOR STREQUAL x86))
+    OR (CMAKE_SYSTEM_PROCESSOR STREQUAL x86)
+)
     set(CMAKE_VS_PLATFORM_TOOLSET_ARCHITECTURE ${CMAKE_SYSTEM_PROCESSOR})
 else()
     message(FATAL_ERROR "Unable identify compiler architecture for CMAKE_SYSTEM_PROCESSOR ${CMAKE_SYSTEM_PROCESSOR}")
 endif()
 
-set(CMAKE_CXX_COMPILER "${VS_TOOLSET_PATH}/bin/Host${CMAKE_VS_PLATFORM_TOOLSET_HOST_ARCHITECTURE}/${CMAKE_VS_PLATFORM_TOOLSET_ARCHITECTURE}/cl.exe")
-set(CMAKE_C_COMPILER "${VS_TOOLSET_PATH}/bin/Host${CMAKE_VS_PLATFORM_TOOLSET_HOST_ARCHITECTURE}/${CMAKE_VS_PLATFORM_TOOLSET_ARCHITECTURE}/cl.exe")
+set(CMAKE_CXX_COMPILER
+    "${VS_TOOLSET_PATH}/bin/Host${CMAKE_VS_PLATFORM_TOOLSET_HOST_ARCHITECTURE}/${CMAKE_VS_PLATFORM_TOOLSET_ARCHITECTURE}/cl.exe"
+)
+set(CMAKE_C_COMPILER
+    "${VS_TOOLSET_PATH}/bin/Host${CMAKE_VS_PLATFORM_TOOLSET_HOST_ARCHITECTURE}/${CMAKE_VS_PLATFORM_TOOLSET_ARCHITECTURE}/cl.exe"
+)
 
 if(CMAKE_SYSTEM_PROCESSOR STREQUAL arm)
     set(CMAKE_CXX_FLAGS_INIT "${CMAKE_CXX_FLAGS_INIT} /EHsc")
 endif()
 
-getMsvcVersion(${CMAKE_CXX_COMPILER} MSVC_VERSION)
+getmsvcversion(${CMAKE_CXX_COMPILER} MSVC_VERSION)
 if(NOT MSVC_VERSION)
     message(FATAL_ERROR "Unable to obtain the compiler version from: ${CMAKE_CXX_COMPILER}")
 endif()

@@ -33,8 +33,6 @@
 # | CMAKE_SYSTEM_PROCESSOR                      | The processor to compiler for. One of 'x86', 'x64', 'arm', 'arm64'. Defaults to ${CMAKE_HOST_SYSTEM_PROCESSOR}. |
 # | CMAKE_WINDOWS_KITS_10_DIR                   | The location of the root of the Windows Kits 10 directory.                                                      |
 # | CLANG_TIDY_CHECKS                           | List of rules clang-tidy should check. Defaults not set.                                                        |
-# | NINJA_PATH                                  | The path to the ninja program. Defaults not set.                                                                |
-# | NUGET_PATH                                  | The path to the nuget program. Defaults not set.                                                                |
 #
 # The toolchain file will set the following variables:
 #
@@ -77,36 +75,32 @@ if(NOT CMAKE_VS_VERSION_PRERELEASE)
     set(CMAKE_VS_VERSION_PRERELEASE OFF)
 endif()
 
-include("${CMAKE_CURRENT_LIST_DIR}/Ninja.cmake")
-include("${CMAKE_CURRENT_LIST_DIR}/NuGet.cmake")
 include("${CMAKE_CURRENT_LIST_DIR}/VSWhere.cmake")
 
 # Find Clang
 #
-findVisualStudio(
-    VERSION ${CMAKE_VS_VERSION_RANGE}
-    PRERELEASE ${CMAKE_VS_VERSION_PRERELEASE}
+findvisualstudio(
+    VERSION
+    ${CMAKE_VS_VERSION_RANGE}
+    PRERELEASE
+    ${CMAKE_VS_VERSION_PRERELEASE}
     REQUIRES
-        Microsoft.VisualStudio.Component.VC.Llvm.Clang
+    Microsoft.VisualStudio.Component.VC.Llvm.Clang
     PROPERTIES
-        installationVersion VS_INSTALLATION_VERSION
-        installationPath VS_INSTALLATION_PATH
+    installationVersion
+    VS_INSTALLATION_VERSION
+    installationPath
+    VS_INSTALLATION_PATH
 )
 
-find_program(CMAKE_C_COMPILER
-    clang.exe
-    HINTS
-        "${VS_INSTALLATION_PATH}/VC/Tools/Llvm/x64/bin"
-        "$ENV{ProgramFiles}/LLVM/bin"
-    REQUIRED
+find_program(
+    CMAKE_C_COMPILER clang.exe HINTS "${VS_INSTALLATION_PATH}/VC/Tools/Llvm/x64/bin" "$ENV{ProgramFiles}/LLVM/bin"
+                                     REQUIRED
 )
 
-find_program(CMAKE_CXX_COMPILER
-    clang++.exe
-    HINTS
-        "${VS_INSTALLATION_PATH}/VC/Tools/Llvm/x64/bin"
-        "$ENV{ProgramFiles}/LLVM/bin"
-    REQUIRED
+find_program(
+    CMAKE_CXX_COMPILER clang++.exe HINTS "${VS_INSTALLATION_PATH}/VC/Tools/Llvm/x64/bin" "$ENV{ProgramFiles}/LLVM/bin"
+                                         REQUIRED
 )
 
 set(CMAKE_CXX_COMPILER_ID "Clang")
@@ -116,7 +110,12 @@ set(CMAKE_C_COMPILER_ID "Clang")
 set(CMAKE_C_COMPILER_FRONTEND_VARIANT "GNU")
 
 if(CLANG_TIDY_CHECKS)
-    get_filename_component(CLANG_PATH ${CMAKE_CXX_COMPILER} DIRECTORY CACHE)
+    get_filename_component(
+        CLANG_PATH
+        ${CMAKE_CXX_COMPILER}
+        DIRECTORY
+        CACHE
+    )
     set(CMAKE_CXX_CLANG_TIDY "${CLANG_PATH}/clang-tidy.exe;-checks=${CLANG_TIDY_CHECKS}")
 endif()
 
