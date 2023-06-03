@@ -16,7 +16,7 @@ jobs:
   build:
     runs-on: macos-latest
     strategy:
-      fail-fast: true
+      fail-fast: false
       matrix:
         compiler:
           - {cxx: "g++-13"}
@@ -63,7 +63,8 @@ jobs:
           CTEST_OUTPUT_ON_FAILURE: True
 
       - name: Run clang-tidy
+        if: matrix.compiler.cxx == 'clang++'
         run: |
           export PATH=/usr/local/opt/llvm/bin/:${PATH}
           ls -1 $PWD/*/*.cpp $PWD/modules/*
-          run-clang-tidy-16 -p ${{runner.workspace}}/build $PWD/*/*.cpp $PWD/modules/*
+          run-clang-tidy -p ${{runner.workspace}}/build $PWD/*/*.cpp $PWD/modules/*
