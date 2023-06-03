@@ -16,10 +16,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
-      fail-fast: true
+      fail-fast: false
       matrix:
         compiler:
-          # - {cxx: "g++-14"}
+          - {cxx: "g++-12"}
           - {cxx: "clang++-16"}
         type: [static, shared]
         build_type: [Debug]
@@ -64,7 +64,7 @@ jobs:
       - name: Build
         working-directory: ${{runner.workspace}}/build
         run: |
-          cmake --build . --config ${{matrix.build_type}}
+          cmake --build . --config ${{matrix.build_type}} -- -k999
 
       - name: Test
         working-directory: ${{runner.workspace}}/build
