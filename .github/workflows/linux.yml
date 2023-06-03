@@ -19,7 +19,7 @@ jobs:
       fail-fast: false
       matrix:
         compiler:
-          - {cxx: "g++-12"}
+          # - {cxx: "g++-13"}
           - {cxx: "clang++-16"}
         type: [static, shared]
         build_type: [Debug]
