@@ -93,12 +93,16 @@ else()
 endif()
 
 add_subdirectory(coro)
-add_subdirectory(comptime)
-add_subdirectory(format)
+
+if(NOT CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_VERSION VERSION_GREATER_EQUAL 13.0.1)
+  add_subdirectory(comptime)
+  add_subdirectory(format)
+  add_subdirectory(ranges)
+endif()
+
 add_subdirectory(lang)
 
 if(NOT CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
   add_subdirectory(lib)
 endif()
 
-add_subdirectory(ranges)

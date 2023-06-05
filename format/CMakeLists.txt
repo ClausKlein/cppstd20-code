@@ -1,7 +1,6 @@
 if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
   set(cxx_sources formatperf.cpp color.cpp)
 else()
-
   set(cxx_sources
       #XXX always40.cpp
       #XXX always41.cpp
