@@ -10,9 +10,9 @@
 //********************************************************
 
 
-module;
+module;              // start module unit with global module fragment
 
-#include <vector>    // gcc needs this
+#include <vector>    // NOTE: clang/gcc needs this! CK
 
 module Mod3;         // implementation unit of module Mod3
 

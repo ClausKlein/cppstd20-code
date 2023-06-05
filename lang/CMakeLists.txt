@@ -16,8 +16,9 @@ set(cxx_sources
     nttpstruct2.cpp
     #-Winfinite-recursion spacecompat.cpp
     tmplauto.cpp
-    #TODO
     valorcoll.cpp
 )
 
 add_tests(cxx_sources)
+
+target_link_libraries(designated PRIVATE fmt::fmt)

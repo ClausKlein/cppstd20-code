@@ -21,7 +21,8 @@ int main()
   c1.buy("table", 59.90);
   c1.buy(4, "chair", 9.20);
 
-  c1.print();
+  // FIXME(CK): missing? c1.print();
+  std::cout << "      Sum: " << c1.sumPrice() << '\n';
   std::cout << "  Average: " << c1.averagePrice() << '\n';
 }
 

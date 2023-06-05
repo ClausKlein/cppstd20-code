@@ -25,3 +25,32 @@ WarningErrorEntry(path='/Users/clausklein/Workspace/cpp/cxx20/cppstd20-code/lib/
 WarningErrorEntry(path='/Users/clausklein/Workspace/cpp/cxx20/cppstd20-code/lib/begin.cpp', lineno='90', severity='warning', message="ignoring return value of function declared with 'nodiscard' attribute [-Wunused-result]", column='11')
 bash-3.2$
 
+bash-3.2$ builddriver run-clang-tidy -p build modules/
+builddriver executing: 'run-clang-tidy -p build modules/'
+Compilation SUCCEED in 33.598371 seconds
+Number of warnings: 23
+WarningErrorEntry(path='/Users/clausklein/Workspace/cpp/cxx20/cppstd20-code/modules/mod2/mod2order.cppm', lineno='24', severity='warning', message='pass by value and use std::move [modernize-pass-by-value]', column='16')
+WarningErrorEntry(path='/Users/clausklein/Workspace/cpp/cxx20/cppstd20-code/modules/mod2/mod2order.cppm', lineno='25', severity='warning', message="parameter 'n' is passed by value and only copied once; consider moving it to avoid unnecessary copies [performance-unnecessary-value-param]", column='21')
+WarningErrorEntry(path='/Users/clausklein/Workspace/cpp/cxx20/cppstd20-code/modules/mod3/mod3order.cppm', lineno='24', severity='warning', message='pass by value and use std::move [modernize-pass-by-value]', column='16')
+WarningErrorEntry(path='/Users/clausklein/Workspace/cpp/cxx20/cppstd20-code/modules/mod3/mod3order.cppm', lineno='25', severity='warning', message="parameter 'n' is passed by value and only copied once; consider moving it to avoid unnecessary copies [performance-unnecessary-value-param]", column='21')
+WarningErrorEntry(path='/Users/clausklein/Workspace/cpp/cxx20/cppstd20-code/modules/mod1/mod1.cppm', lineno='25', severity='warning', message='pass by value and use std::move [modernize-pass-by-value]', column='16')
+WarningErrorEntry(path='/Users/clausklein/Workspace/cpp/cxx20/cppstd20-code/modules/mod1/mod1.cppm', lineno='35', severity='warning', message='pass by value and use std::move [modernize-pass-by-value]', column='12')
+WarningErrorEntry(path='/Users/clausklein/Workspace/cpp/cxx20/cppstd20-code/modules/mod1/mod1.cppm', lineno='39', severity='warning', message='use emplace_back instead of push_back [hicpp-use-emplace,modernize-use-emplace]', column='12')
+WarningErrorEntry(path='/Users/clausklein/Workspace/cpp/cxx20/cppstd20-code/modules/mod1/mod1.cppm', lineno='42', severity='warning', message='use emplace_back instead of push_back [hicpp-use-emplace,modernize-use-emplace]', column='12')
+WarningErrorEntry(path='/Users/clausklein/Workspace/cpp/cxx20/cppstd20-code/modules/mod1/mod1.cppm', lineno='44', severity='warning', message="function 'sumPrice' should be marked [[nodiscard]] [modernize-use-nodiscard]", column='3')
+WarningErrorEntry(path='/Users/clausklein/Workspace/cpp/cxx20/cppstd20-code/modules/mod1/mod1.cppm', lineno='45', severity='warning', message="function 'averagePrice' should be marked [[nodiscard]] [modernize-use-nodiscard]", column='3')
+WarningErrorEntry(path='/Users/clausklein/Workspace/cpp/cxx20/cppstd20-code/modules/mod1/mod1price.cpp', lineno='32', severity='warning', message="narrowing conversion from 'size_type' (aka 'unsigned long') to 'double' [bugprone-narrowing-conversions]", column='23')
+WarningErrorEntry(path='/Users/clausklein/Workspace/cpp/cxx20/cppstd20-code/modules/mod2/mod2.cppm', lineno='27', severity='warning', message='pass by value and use std::move [modernize-pass-by-value]', column='12')
+WarningErrorEntry(path='/Users/clausklein/Workspace/cpp/cxx20/cppstd20-code/modules/mod2/mod2.cppm', lineno='31', severity='warning', message='use emplace_back instead of push_back [hicpp-use-emplace,modernize-use-emplace]', column='12')
+WarningErrorEntry(path='/Users/clausklein/Workspace/cpp/cxx20/cppstd20-code/modules/mod2/mod2.cppm', lineno='34', severity='warning', message='use emplace_back instead of push_back [hicpp-use-emplace,modernize-use-emplace]', column='12')
+WarningErrorEntry(path='/Users/clausklein/Workspace/cpp/cxx20/cppstd20-code/modules/mod2/mod2.cppm', lineno='36', severity='warning', message="function 'sumPrice' should be marked [[nodiscard]] [modernize-use-nodiscard]", column='3')
+WarningErrorEntry(path='/Users/clausklein/Workspace/cpp/cxx20/cppstd20-code/modules/mod2/mod2.cppm', lineno='37', severity='warning', message="function 'averagePrice' should be marked [[nodiscard]] [modernize-use-nodiscard]", column='3')
+WarningErrorEntry(path='/Users/clausklein/Workspace/cpp/cxx20/cppstd20-code/modules/mod2/mod2price.cpp', lineno='36', severity='warning', message="narrowing conversion from 'size_type' (aka 'unsigned long') to 'double' [bugprone-narrowing-conversions]", column='23')
+WarningErrorEntry(path='/Users/clausklein/Workspace/cpp/cxx20/cppstd20-code/modules/mod3/mod3price.cpp', lineno='35', severity='warning', message="narrowing conversion from 'size_type' (aka 'unsigned long') to 'double' [bugprone-narrowing-conversions]", column='23')
+WarningErrorEntry(path='/Users/clausklein/Workspace/cpp/cxx20/cppstd20-code/modules/mod3/mod3customer.cppm', lineno='27', severity='warning', message='pass by value and use std::move [modernize-pass-by-value]', column='12')
+WarningErrorEntry(path='/Users/clausklein/Workspace/cpp/cxx20/cppstd20-code/modules/mod3/mod3customer.cppm', lineno='31', severity='warning', message='use emplace_back instead of push_back [hicpp-use-emplace,modernize-use-emplace]', column='12')
+WarningErrorEntry(path='/Users/clausklein/Workspace/cpp/cxx20/cppstd20-code/modules/mod3/mod3customer.cppm', lineno='34', severity='warning', message='use emplace_back instead of push_back [hicpp-use-emplace,modernize-use-emplace]', column='12')
+WarningErrorEntry(path='/Users/clausklein/Workspace/cpp/cxx20/cppstd20-code/modules/mod3/mod3customer.cppm', lineno='36', severity='warning', message="function 'sumPrice' should be marked [[nodiscard]] [modernize-use-nodiscard]", column='3')
+WarningErrorEntry(path='/Users/clausklein/Workspace/cpp/cxx20/cppstd20-code/modules/mod3/mod3customer.cppm', lineno='37', severity='warning', message="function 'averagePrice' should be marked [[nodiscard]] [modernize-use-nodiscard]", column='3')
+For full log, please open: /var/folders/wb/ckvxxgls5db7qyhqq4y5_l1c0000gq/T/build-a5x4eny2.log
+bash-3.2$ 

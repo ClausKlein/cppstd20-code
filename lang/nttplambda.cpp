@@ -16,12 +16,12 @@
 template<std::invocable auto GetVat>
 int addTax(int value)
 {
-  return static_cast<int>(std::round(value * (1 + GetVat()))); 
+  return static_cast<int>(std::round(value * (1 + GetVat())));
 }
 
 int main()
 {
-  auto getDefaultTax = [] {
+  constexpr auto getDefaultTax = [] {
     return 0.19;
   };
 

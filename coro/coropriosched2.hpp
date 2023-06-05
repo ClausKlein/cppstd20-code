@@ -117,8 +117,8 @@ class CoroPrioScheduler
 };
 
 inline auto CoroPrioTask::promise_type::await_transform(CoroPrioRequest pr) {  // deal with co_await CoroPrio
-  auto hdl = CoroPrioTask::CoroHdl::from_promise(*this);
-  schedPtr->changePrio(hdl, pr);
+  auto _hdl = CoroPrioTask::CoroHdl::from_promise(*this);
+  schedPtr->changePrio(_hdl, pr);
   return std::suspend_always{};
 }
 

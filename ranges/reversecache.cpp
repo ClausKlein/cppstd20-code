@@ -37,7 +37,7 @@ int main()
   vec.insert(vec.begin(), 0);
   lst.insert(lst.begin(), 0);
   print(vVec);                 // OK: 2 1 0
-  print(vLst);                 // OOPS: 3 2 1
+  print(vLst);                 // OOPS: 3 2 1; ERROR: endless loop with MSVC! CK
 
   // creating a copy heals:
   auto vVec2 = vVec;

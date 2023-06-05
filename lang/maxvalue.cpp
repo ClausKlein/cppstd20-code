@@ -28,7 +28,7 @@ auto maxValue(auto a, auto b)
 
 // maxValue() for pointers:
 auto maxValue(IsPointer auto a, IsPointer auto b)
-requires std::totally_ordered_with<decltype(*a), decltype(*b)>  
+requires std::totally_ordered_with<decltype(*a), decltype(*b)>
 {
   return maxValue(*a, *b);  // return maximum value of where the pointers refer to
 }
@@ -43,7 +43,7 @@ int main()
   int* xp = &x;
   int* yp = &y;
   std::cout << maxValue(&xp, &yp) << '\n';  // maximum value of pointer to pointer
-  
+
   double d = 49.9;
   std::cout << maxValue(xp, &d) << '\n';    // maximum value of int and double pointer
 }

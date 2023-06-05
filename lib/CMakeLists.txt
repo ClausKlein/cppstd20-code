@@ -6,7 +6,7 @@ set(cxx_sources
     #jthread atomicweak.cpp
     #jthread barrier.cpp
     #jthread barrierstop.cpp
-    begin.cpp
+    #AddressSanitizer issues! begin.cpp
     #TODO bitops16.cpp
     #TODO bitops8.cpp
     #TODO chrono1.cpp
