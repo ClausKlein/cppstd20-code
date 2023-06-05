@@ -94,7 +94,7 @@ endif()
 
 add_subdirectory(coro)
 
-if(NOT CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_VERSION VERSION_GREATER_EQUAL 13.0.1)
+if(NOT LINUX)
   add_subdirectory(comptime)
   add_subdirectory(format)
   add_subdirectory(ranges)
