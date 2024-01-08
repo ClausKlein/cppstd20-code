@@ -47,8 +47,9 @@ jobs:
 
       - name: Create Build Environment
         run: |
-          pip install ninja
+          pip install -U cmake ninja
           cmake --version
+          ninja --version
           cmake -E make_directory ${{runner.workspace}}/build
 
       - name: Configure

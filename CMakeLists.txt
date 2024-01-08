@@ -82,7 +82,7 @@ if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID STREQUAL "Apple
   # set(CMAKE_EXPERIMENTAL_CXX_MODULE_MAP_FLAG "-fmodules-ts -fmodule-mapper=<MODULE_MAP_FILE> -fdep-format=trtbd -x c++")
   set(CMAKE_CXX_SCAN_FOR_MODULES 0)
 elseif(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" AND CMAKE_CXX_COMPILER_VERSION VERSION_GREATER_EQUAL 17.0.1)
-  if(${CMAKE_VERSION} VERSION_LESS_EQUAL "3.28.0")
+  if(${CMAKE_VERSION} VERSION_LESS "3.28.0")
     set(CMAKE_EXPERIMENTAL_CXX_MODULE_MAP_FORMAT "clang")
     set(CMAKE_EXE_LINKER_FLAGS -lstdc++)
     # Workaround for C++Modules: Missing module map flags in exported compile commands

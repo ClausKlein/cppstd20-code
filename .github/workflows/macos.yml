@@ -34,7 +34,7 @@ jobs:
 
       - name: Create Build Environment
         run: |
-          brew install gcc llvm ninja
+          brew install gcc llvm cmake ninja
           cmake --version
           cmake -E make_directory ${{runner.workspace}}/build
 
