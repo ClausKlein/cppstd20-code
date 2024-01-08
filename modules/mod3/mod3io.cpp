@@ -14,7 +14,14 @@ module;              // start module unit with global module fragment
 
 #include <iostream>
 #include <vector>
+
+#ifdef __cpp_lib_format
 #include <format>
+using std::format;
+#else
+#include <fmt/format.h>
+using fmt::format;
+#endif
 
 module Mod3;         // implementation unit of module Mod3
 
@@ -25,12 +32,12 @@ void Customer::print() const
   // print name:
   std::cout << name << ":\n";
   // print order entries:
-  for (const Order& od : orders) {
-    std::cout << std::format("{:3} {:14} {:6.2f} {:6.2f}\n",
-                             od.count, od.name, od.price, od.count * od.price);             
+  for (const auto& od : orders) {
+    std::cout << format("{:3} {:14} {:6.2f} {:6.2f}\n",
+                        od.count, od.name, od.price, od.count * od.price);
   }
   // print sum:
-  std::cout << std::format("{:25} ------\n", ' ');
-  std::cout << std::format("{:25} {:6.2f}\n", "    Sum:", sumPrice());
+  std::cout << format("{:25} ------\n", ' ');
+  std::cout << format("{:25} {:6.2f}\n", "    Sum:", sumPrice());
 }
 

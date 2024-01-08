@@ -1,0 +1,10 @@
+---
+Language:                           Cpp
+Standard:                           Cpp11
+BasedOnStyle:                       Google
+ConstructorInitializerIndentWidth:  2
+ContinuationIndentWidth:            2
+IndentWidth:                        2
+TabWidth:                           2
+UseTab:                             Never
+...

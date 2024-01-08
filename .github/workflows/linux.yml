@@ -1,0 +1,80 @@
+---
+name: linux
+
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+      - develop
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        compiler:
+          - {cxx: "g++"}
+          - {cxx: "clang++-16"}
+        type: [static, shared]
+        build_type: [Debug]
+        cxx_std: [20, 23]
+
+        include:
+          - {type: static, build: NO}
+          - {type: shared, build: YES}
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install clang-16
+        if: matrix.compiler.cxx == 'clang++-16'
+        env:
+          DEBIAN_FRONTEND: noninteractive
+        run: |
+          sudo apt-get update
+          wget https://apt.llvm.org/llvm.sh
+          chmod +x llvm.sh
+          sudo ./llvm.sh 16 || sudo ./llvm.sh 16 workaround
+          rm llvm.sh
+          sudo apt-get install -y --no-install-recommends libstdc++-12-dev \
+            libc++-16-dev libc++abi-16-dev clang-tidy-16 libunwind-16-dev llvm-16 libfuzzer-16-dev
+
+      - name: Create Build Environment
+        run: |
+          pip install -U cmake ninja
+          cmake --version
+          ninja --version
+          cmake -E make_directory ${{runner.workspace}}/build
+
+      - name: Configure
+        working-directory: ${{runner.workspace}}/build
+        run: |
+          cmake -G Ninja \
+            -D CMAKE_CXX_COMPILER=${{matrix.compiler.cxx}} \
+            -D CMAKE_BUILD_TYPE=${{matrix.build_type}} \
+            -D CMAKE_CXX_STANDARD=${{matrix.cxx_std}} \
+            -D BUILD_SHARED_LIBS=${{matrix.build}} \
+            $GITHUB_WORKSPACE
+
+      - name: Build
+        working-directory: ${{runner.workspace}}/build
+        run: |
+          cmake --build . --config ${{matrix.build_type}} -- -k999
+
+      - name: Test
+        working-directory: ${{runner.workspace}}/build
+        run: ctest -C ${{matrix.build_type}} --timeout 60
+        env:
+          CTEST_OUTPUT_ON_FAILURE: True
+
+      - name: Run clang-tidy
+        if: matrix.compiler.cxx == 'clang++-16'
+        run: |
+          ls -1 $PWD/*/*.cpp $PWD/modules/*
+          run-clang-tidy-16 -p ${{runner.workspace}}/build $PWD/*/*.cpp $PWD/modules/*

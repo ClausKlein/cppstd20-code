@@ -12,7 +12,14 @@
 
 #include <iostream>
 #include <locale>
+
+#ifdef __cpp_lib_format
 #include <format>
+using std::format;
+#else
+#include <fmt/format.h>
+using fmt::format;
+#endif
 
 // define facet for German bool names:
 class GermanBoolNames : public std::numpunct_byname<char> {
@@ -34,8 +41,8 @@ int main()
   // create locale with German bool names:
   std::locale locBool{std::cin.getloc(),
                       new GermanBoolNames{""}};
-  
+
   // use locale to print Boolean values:
-  std::cout << std::format(locBool, "{0} {0:L}\n", false);  // false falsch
+  std::cout << format(locBool, "{0} {0:L}\n", false);  // false falsch
 }
 

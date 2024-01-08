@@ -10,19 +10,19 @@
 //********************************************************
 
 
-module;
+module;              // start module unit with global module fragment
 
-#include <vector>    // gcc needs this
+#include <vector>    // NOTE: clang/gcc needs this! CK
 
 module Mod2;         // implementation unit of module Mod2
 
-import :Order;       // import internal partition Order 
+import :Order;       // import internal partition Order
 
 double Customer::sumPrice() const
 {
   double sum = 0.0;
-  for (const Order& od : orders) {  // ERROR with VC++
-  //for (const auto& od : orders) {  // OK
+  //XXX for (const Order& od : orders) {  // ERROR with VC++
+  for (const auto& od : orders) {  // OK
     sum += od.count * od.price;
   }
   return sum;

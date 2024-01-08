@@ -22,7 +22,7 @@ consteval auto mergeValues(T rg, auto... vals)
   // create compile-time vector from passed range:
   std::vector<std::ranges::range_value_t<T>> v{std::ranges::begin(rg),
                                                std::ranges::end(rg)};
-  (... , v.push_back(vals));  // merge all passed parameters  
+  (... , v.push_back(vals));  // merge all passed parameters
 
   std::ranges::sort(v);       // sort all elements
 
