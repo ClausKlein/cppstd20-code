@@ -9,7 +9,6 @@ endif()
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_DEBUG_POSTFIX D)
-set(CMAKE_SKIP_INSTALL_RULES ON)
 
 option(OPTION_ENABLE_UNITY "Enable Unity builds of project" OFF)
 option(OPTION_ENABLE_CLANG_TIDY "Enable clang-tdiy as prebuild step" OFF)

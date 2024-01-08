@@ -71,7 +71,7 @@ WindowsToolchain uses [`cmakelang`][cmakelang] for linting the CMake files in th
 [.cmake-format.yaml](./.cmake-format.yaml) file describes the formatting style for the codebase. To run the linting
 tools:
 
-1. Install [`cmakelang`][cmakelang] following [the installation instuctions](https://cmake-format.readthedocs.io/en/latest/installation.html).
+1. Install [`cmakelang`][cmakelang] following [the installation instructions](https://cmake-format.readthedocs.io/en/latest/installation.html).
 Note: Since WindowsToolchain uses a `.yaml` file for configuration, make sure to install the `cmakelang[YAML]` package.
 
 2. Run [`./analyze.ps1`](./analyze.ps1)

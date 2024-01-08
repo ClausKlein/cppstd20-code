@@ -11,6 +11,9 @@
 
 #pragma once
 
+#include <coroutine>  // for suspend_always()
+#include <exception>  // for terminate()
+
 struct CoroTask::promise_type {
   auto get_return_object() {       // init and return the coroutine interface
     return CoroTask{CoroHdl::from_promise(*this)};
