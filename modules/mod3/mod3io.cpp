@@ -15,14 +15,6 @@ module;              // start module unit with global module fragment
 #include <iostream>
 #include <vector>
 
-// #include <version>
-// #ifdef __cpp_lib_format
-// #include <format>
-// using std::format;
-// #else
-// #include <fmt/format.h>
-// #endif
-
 import fmt;
 
 module Mod3;         // implementation unit of module Mod3

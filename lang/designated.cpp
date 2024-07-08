@@ -12,15 +12,8 @@
 
 #include <iostream>
 #include <string>
-#include <version>
 
-#ifdef __cpp_lib_format
-#include <format>
-using std::format;
-#else
-#include <fmt/format.h>
-using fmt::format;
-#endif
+import fmt;
 
 struct Value {
   double amount = 0;
@@ -39,7 +32,7 @@ int main()
   //XXX Value v6(.amount = 29.9, .unit = "Euro");    // ERROR: only supported for curly braces
 
   for (Value val : {v1, v2, v3}) {
-    std::cout << std::format("{:.{}f} {}\n", val.amount, val.precision,
+    std::cout << fmt::format("{:.{}f} {}\n", val.amount, val.precision,
                              val.unit);
   }
 }
