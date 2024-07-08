@@ -22,18 +22,17 @@ import :Order;       // import internal partition Order
 export class Customer {
  private:
   std::string name;
-  std::vector<Order> orders;
+  std::vector<Order> orders{};
+
  public:
-  Customer(const std::string& n)
-   : name{n} {
-  }
+  Customer(std::string n) : name{std::move(n)} {}
   void buy(const std::string& ordername, double price) {
     orders.push_back(Order{1, ordername, price});
   }
   void buy(int num, const std::string& ordername, double price) {
     orders.push_back(Order{num, ordername, price});
   }
-  double sumPrice() const;
-  double averagePrice() const;
+  [[nodiscard]] double sumPrice() const;
+  [[nodiscard]] double averagePrice() const;
 };
 

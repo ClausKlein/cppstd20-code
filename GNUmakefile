@@ -1,3 +1,6 @@
+export CC=gcc-14
+export CXX=g++-14
+
 .PHONY: all configure build test install format clean distclean
 all: # test
 	cmake --workflow --preset Release --fresh

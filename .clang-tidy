@@ -15,6 +15,7 @@ Checks:
   -misc-no-recursion,
   -misc-non-private-member-variables-in-classes,
   -misc-unused-parameters,
+  -misc-include-cleaner,
   modernize-*,
   -modernize-return-braced-init-list,
   -modernize-use-trailing-return-type,
@@ -33,7 +34,6 @@ Checks:
 '
 # WarningsAsErrors:  'clang-*'
 HeaderFilterRegex: ''
-AnalyzeTemporaryDtors: false
 FormatStyle:     file
 UseColor:        false
 User:            klein_cl

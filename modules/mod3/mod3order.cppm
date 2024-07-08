@@ -22,7 +22,6 @@ struct Order {
   double price;
 
   Order(int c, std::string n, double p)
-   : count{c}, name{n}, price{p} {
-  }
+    : count{c}, name{std::move(n)}, price{p} {}
 };
 

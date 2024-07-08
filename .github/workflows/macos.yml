@@ -44,6 +44,9 @@ jobs:
         run: |
           cmake --version
           ninja --version
+          g++ --version
+          clang++ --version
+          clang-tidy --version
           cmake -E make_directory ${{runner.workspace}}/build
 
       - name: Configure

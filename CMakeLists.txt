@@ -47,6 +47,7 @@ CPMAddPackage(
   GITHUB_REPOSITORY fmtlib/fmt
   EXCLUDE_FROM_ALL NO
   SYSTEM YES
+  OPTIONS "FMT_MODULE ON"
 )
 target_disable_clang_tidy(fmt)
 
