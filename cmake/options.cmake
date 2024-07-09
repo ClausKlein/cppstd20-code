@@ -15,10 +15,12 @@ option(OPTION_ENABLE_CLANG_TIDY "Enable clang-tdiy as prebuild step" OFF)
 option(BUILD_SHARED_LIBS "Global flag to cause add_library() to create shared libraries if on." OFF)
 
 if(APPLE OR LINUX)
-    set(OPTION_ENABLED_SANITIZER
-        "ENABLE_SANITIZER_ADDRESS; ENABLE_SANITIZER_UNDEFINED_BEHAVIOR"
-        CACHE STRING "Enabled sanitizer for debug build"
-    )
+    if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+        set(OPTION_ENABLED_SANITIZER
+            "ENABLE_SANITIZER_ADDRESS; ENABLE_SANITIZER_UNDEFINED_BEHAVIOR"
+            CACHE STRING "Enabled sanitizer for debug build"
+        )
+    endif()
 elseif(CMAKE_CXX_COMPILER_ID MATCHES "Clang" AND CMAKE_CXX_SIMULATE_ID MATCHES "MSVC")
     set(OPTION_ENABLED_SANITIZER
         "ENABLE_SANITIZER_MEMORY"

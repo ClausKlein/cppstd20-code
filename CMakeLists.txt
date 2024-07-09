@@ -34,22 +34,22 @@ project_options(
   #XXX ENABLE_SANITIZER_UNDEFINED_BEHAVIOR
   #XXX ENABLE_SANITIZER_THREAD
   #XXX ENABLE_SANITIZER_MEMORY
-  #TODO: WARNINGS_AS_ERRORS
+  WARNINGS_AS_ERRORS
 )
 # cmake-format: on
 
-CPMAddPackage("gh:TheLartians/Format.cmake@1.8.0")
-CPMAddPackage("gh:TheLartians/PackageProject.cmake@1.11.0")
-
-CPMAddPackage(
-  NAME fmt
-  GIT_TAG 11.0.1
-  GITHUB_REPOSITORY fmtlib/fmt
-  EXCLUDE_FROM_ALL NO
-  SYSTEM YES
-  OPTIONS "FMT_MODULE ON"
-)
-target_disable_clang_tidy(fmt)
+# CPMAddPackage("gh:TheLartians/Format.cmake@1.8.0")
+# CPMAddPackage("gh:TheLartians/PackageProject.cmake@1.11.0")
+#
+# CPMAddPackage(
+#   NAME fmt
+#   GIT_TAG 11.0.1
+#   GITHUB_REPOSITORY fmtlib/fmt
+#   EXCLUDE_FROM_ALL NO
+#   SYSTEM YES
+#   OPTIONS "FMT_MODULE ON"
+# )
+# target_disable_clang_tidy(fmt)
 
 target_compile_features(project_options INTERFACE cxx_std_${CMAKE_CXX_STANDARD})
 

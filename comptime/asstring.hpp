@@ -15,11 +15,6 @@
 
 #ifdef __cpp_lib_format
 #include <format>
-using std::format;
-#else
-#include <fmt/format.h>
-using fmt::format;
-#endif
 
 // convert an integral value to a std::string
 // - can be called at compile time or runtime
@@ -43,7 +38,8 @@ constexpr std::string asString(long long value)
   }
   else {
     // runtime version:
-    return format("{}", value);
+    return std::format("{}", value);
   }
 }
 
+#endif

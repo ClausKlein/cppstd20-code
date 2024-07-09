@@ -50,7 +50,7 @@ target_sources(
 )
 # cmake-format: on
 target_compile_features(mod1 PUBLIC cxx_std_20)
-target_link_libraries(mod1 PUBLIC fmt::fmt)
+#XXX target_link_libraries(mod1 PUBLIC fmt::fmt)
 if(CMAKE_SKIP_INSTALL_RULES AND CMAKE_BUILD_TYPE STREQUAL "Debug")
   target_link_libraries(mod1 PUBLIC $<BUILD_INTERFACE:project_warnings project_options>)
 endif()
@@ -102,7 +102,7 @@ target_sources(
 )
 # cmake-format: on
 target_compile_features(mod3 PUBLIC cxx_std_20)
-target_link_libraries(mod3 PUBLIC fmt::fmt)
+#XXX target_link_libraries(mod3 PUBLIC fmt::fmt)
 if(CMAKE_SKIP_INSTALL_RULES AND CMAKE_BUILD_TYPE STREQUAL "Debug")
   target_link_libraries(mod3 PUBLIC $<BUILD_INTERFACE:project_warnings project_options>)
 endif()
