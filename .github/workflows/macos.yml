@@ -22,7 +22,7 @@ jobs:
           - {cxx: "g++-14"}
           - {cxx: "clang++"}
         type: [static, shared]
-        build_type: [Debug]
+        build_type: [Release]
         cxx_std: [20, 23]
 
         include:

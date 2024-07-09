@@ -23,7 +23,7 @@ jobs:
         platform: [x64]
         cxx_standard: [20, 23]
         shared: ["", -DBUILD_SHARED_LIBS=ON]
-        build_type: [Debug]
+        build_type: [Release]
 
     steps:
       - uses: actions/checkout@v3
