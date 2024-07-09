@@ -23,14 +23,14 @@ jobs:
           - {cxx: "clang++"}
         type: [static, shared]
         build_type: [Release]
-        cxx_std: [20, 23]
+        cxx_std: [23]
 
         include:
           - {type: static, build: NO}
           - {type: shared, build: YES}
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Install llvm-18
         run: |

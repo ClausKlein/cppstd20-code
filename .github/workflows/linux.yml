@@ -23,14 +23,14 @@ jobs:
           - {cxx: "clang++-18"}
         type: [static, shared]
         build_type: [Release]
-        cxx_std: [20, 23]
+        cxx_std: [23]
 
         include:
           - {type: static, build: NO}
           - {type: shared, build: YES}
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Install Build Tools
         env:
@@ -46,7 +46,6 @@ jobs:
 
       - name: Create Build Environment
         run: |
-          # XXX pip install -U cmake ninja
           cmake --version
           ninja --version
           cmake -E make_directory ${{runner.workspace}}/build
