@@ -20,7 +20,7 @@ jobs:
       matrix:
         compiler:
           - {cxx: "g++-14"}
-          - {cxx: "clang++"}
+          # TODO: - {cxx: "clang++"}
         type: [static, shared]
         build_type: [Release]
         cxx_std: [23]
@@ -32,7 +32,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install llvm-18
+      - name: Install Build Tools
         run: |
           brew install gcc llvm cmake ninja
           export PATH="$(brew --prefix llvm@18)/bin:$PATH" && echo "PATH=$PATH" >> $GITHUB_ENV

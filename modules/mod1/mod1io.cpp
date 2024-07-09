@@ -13,6 +13,7 @@
 module;              // start module unit with global module fragment
 
 #include <iostream>
+#include <version>
 
 #ifdef __cpp_lib_format
 #include <format>
