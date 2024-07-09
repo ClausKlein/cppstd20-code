@@ -42,12 +42,12 @@ jobs:
           chmod +x llvm.sh
           sudo ./llvm.sh 18 || sudo ./llvm.sh 18 workaround
           rm llvm.sh
-          sudo apt-get install -y --no-install-recommends libstdc++-12-dev \
+          sudo apt-get install -y --no-install-recommends ninja-build \
             libc++-18-dev libc++abi-18-dev clang-tidy-18 libunwind-18-dev llvm-18 libfuzzer-18-dev
 
       - name: Create Build Environment
         run: |
-          pip install -U cmake ninja
+          # XXX pip install -U cmake ninja
           cmake --version
           ninja --version
           cmake -E make_directory ${{runner.workspace}}/build
