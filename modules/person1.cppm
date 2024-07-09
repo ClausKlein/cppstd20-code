@@ -10,16 +10,17 @@
 //********************************************************
 
 
-module;
+module;              // start module unit with global module fragment
+
 #include <iostream>
 #include <string>
 
-export module ModPerson;   // THE module interface
+export module ModPerson;   // The module interface
 
-class Person {             // note: \IBnot exported
+class Person {             // NOTE: not exported!
    std::string name;
  public:
-   Person(std::string n) 
+   Person(std::string n)
     : name{std::move(n)} {
    }
    std::string getName() const {

@@ -15,6 +15,7 @@
 #include <iostream>
 #include <string>
 #include <coroutine>
+#include <exception>  // for terminate()
 
 // coroutine interface to deal with a simple task
 // - providing resume() to resume it

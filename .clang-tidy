@@ -15,6 +15,7 @@ Checks:
   -misc-no-recursion,
   -misc-non-private-member-variables-in-classes,
   -misc-unused-parameters,
+  -misc-include-cleaner,
   modernize-*,
   -modernize-return-braced-init-list,
   -modernize-use-trailing-return-type,
@@ -31,9 +32,8 @@ Checks:
   # -hicpp-braces-around-statements,-readability-braces-around-statements,
   # -hicpp-uppercase-literal-suffix,-readability-uppercase-literal-suffix,
 '
-WarningsAsErrors:  '*'
+# WarningsAsErrors:  'clang-*'
 HeaderFilterRegex: ''
-AnalyzeTemporaryDtors: false
 FormatStyle:     file
 UseColor:        false
 User:            klein_cl

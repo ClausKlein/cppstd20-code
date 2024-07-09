@@ -1,0 +1,79 @@
+---
+name: macos
+
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+      - develop
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: macos-14
+    strategy:
+      fail-fast: false
+      matrix:
+        compiler:
+          - {cxx: "g++-14"}
+          # TODO: - {cxx: "clang++"}
+        type: [static, shared]
+        build_type: [Release]
+        cxx_std: [23]
+
+        include:
+          - {type: static, build: NO}
+          - {type: shared, build: YES}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Build Tools
+        run: |
+          brew install gcc llvm cmake ninja
+          export PATH="$(brew --prefix llvm@18)/bin:$PATH" && echo "PATH=$PATH" >> $GITHUB_ENV
+          # NO! export LDFLAGS="-L$(brew --prefix llvm@18)/lib/c++ $LDFLAGS" && echo "LDFLAGS=$LDFLAGS" >> $GITHUB_ENV
+          # echo "CXX=clang++" >> $GITHUB_ENV
+          # echo "CC=clang-18" >> $GITHUB_ENV
+
+      - name: Create Build Environment
+        run: |
+          cmake --version
+          ninja --version
+          g++ --version
+          clang++ --version
+          clang-tidy --version
+          cmake -E make_directory ${{runner.workspace}}/build
+
+      - name: Configure
+        working-directory: ${{runner.workspace}}/build
+        run: |
+          export PATH=/usr/local/opt/llvm/bin/:${PATH}
+          cmake -G Ninja \
+            -D CMAKE_CXX_COMPILER=${{matrix.compiler.cxx}} \
+            -D CMAKE_BUILD_TYPE=${{matrix.build_type}} \
+            -D CMAKE_CXX_STANDARD=${{matrix.cxx_std}} \
+            -D BUILD_SHARED_LIBS=${{matrix.build}} \
+            $GITHUB_WORKSPACE
+
+      - name: Build
+        working-directory: ${{runner.workspace}}/build
+        run: |
+          threads=`sysctl -n hw.logicalcpu`
+          cmake --build . --config ${{matrix.build_type}} --parallel $threads
+
+      - name: Test
+        working-directory: ${{runner.workspace}}/build
+        run: ctest -C ${{matrix.build_type}} --timeout 60
+        env:
+          CTEST_OUTPUT_ON_FAILURE: True
+
+      - name: Run clang-tidy
+        if: matrix.compiler.cxx == 'clang++'
+        run: |
+          ls -1 $PWD/*/*.cpp $PWD/modules/*
+          run-clang-tidy -p ${{runner.workspace}}/build $PWD/*/*.cpp $PWD/modules/*

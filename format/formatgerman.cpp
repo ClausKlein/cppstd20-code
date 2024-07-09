@@ -12,7 +12,14 @@
 
 #include <iostream>
 #include <locale>
+
+#ifdef __cpp_lib_format
 #include <format>
+using std::format;
+#else
+#include <fmt/format.h>
+using fmt::format;
+#endif
 
 std::locale getLocale()
 {
@@ -38,6 +45,6 @@ int main()
   std::locale loc = getLocale();
 
   // use locale to print floating-point values:
-  std::cout << std::format(loc, "{0} {0:L}\n", 1000.7);  // 1000.7 1.000,7
+  std::cout << format(loc, "{0} {0:L}\n", 1000.7);  // 1000.7 1.000,7
 }
 

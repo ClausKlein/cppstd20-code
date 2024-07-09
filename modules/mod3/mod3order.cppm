@@ -9,26 +9,19 @@
 //  http://creativecommons.org/licenses/by/4.0/
 //********************************************************
 
+
 module;              // start module unit with global module fragment
 
-#include <vector>    // NOTE: clang/gcc needs this! CK
+#include <string>
 
-module Mod1;         // implementation unit of module Mod1
+module Mod3:Order;   // internal partition declaration
 
-double Customer::sumPrice() const
-{
-  double sum = 0.0;
-  for (const auto& od : orders) {
-    sum += od.count * od.price;
-  }
-  return sum;
-}
+struct Order {
+  int count;
+  std::string name;
+  double price;
 
-double Customer::averagePrice() const
-{
-  if (orders.empty()) {
-    return 0.0;
-  }
-  return sumPrice() / orders.size();
-}
+  Order(int c, std::string n, double p)
+    : count{c}, name{std::move(n)}, price{p} {}
+};
 

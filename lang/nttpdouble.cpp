@@ -16,7 +16,7 @@
 template<double Vat>
 int addTax(int value)
 {
-  return static_cast<int>(std::round(value * (1 + Vat))); 
+  return static_cast<int>(std::round(value * (1 + Vat)));
 }
 
 int main()

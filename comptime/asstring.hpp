@@ -12,6 +12,8 @@
 #pragma once
 
 #include <string>
+
+#ifdef __cpp_lib_format
 #include <format>
 
 // convert an integral value to a std::string
@@ -40,3 +42,4 @@ constexpr std::string asString(long long value)
   }
 }
 
+#endif

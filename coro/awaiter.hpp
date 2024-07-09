@@ -20,7 +20,7 @@ class Awaiter {
     return false;      // do suspend
   }
 
-  void await_suspend(auto hdl) const noexcept {
+  void await_suspend(auto /* hdl */) const noexcept {
     std::cout << "   await_suspend()\n";
   }
 

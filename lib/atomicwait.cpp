@@ -20,7 +20,7 @@ int main()
   std::atomic<int> aVal{0};
 
   // reader:
-  std::jthread tRead{[&] {
+  std::jthread theReader{[&] {
                        int lastX = aVal.load();
                        while (lastX >= 0) {
                          aVal.wait(lastX);
@@ -31,7 +31,7 @@ int main()
                     }};
 
   // writer:
-  std::jthread tWrite{[&] {
+  std::jthread theWriter{[&] {
                         for (int newVal : { 17, 34, 3, 42, -1}) {
                           std::this_thread::sleep_for(5ns);
                           aVal = newVal;
